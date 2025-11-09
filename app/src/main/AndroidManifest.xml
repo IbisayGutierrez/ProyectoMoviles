@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoMoviles">
         <activity
+            android:name=".InicioSesion"
+            android:exported="false" />
+        <activity
+            android:name=".Pelicula"
+            android:exported="false" />
+        <activity
+            android:name=".Cliente"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
