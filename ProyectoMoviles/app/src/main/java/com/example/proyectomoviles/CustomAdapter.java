@@ -44,7 +44,7 @@ public class CustomAdapter extends BaseAdapter {
         Pelicula p=lst.get(i);
 
         if (view==null)
-            view= LayoutInflater.from(context).inflate(R.layout.listview_personalizado,null);
+            view= LayoutInflater.from(context).inflate(R.layout.listview,null);
 
         ImageViewContacto=view.findViewById(R.id.imageViewContacto);
         TextViewNombre=view.findViewById(R.id.textViewNombre);
