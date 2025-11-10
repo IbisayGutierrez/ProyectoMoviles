@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoMoviles">
         <activity
+            android:name=".CrearCliente"
+            android:exported="false" />
+        <activity
             android:name=".InicioSesion"
             android:exported="false" />
         <activity
