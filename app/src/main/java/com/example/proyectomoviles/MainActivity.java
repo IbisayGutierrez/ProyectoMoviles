@@ -1,24 +1,45 @@
 package com.example.proyectomoviles;
 
-import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import android.os.Bundle;
+import android.widget.ListView;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    ListView listMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        listMenu = findViewById(R.id.ListViewMenu);
+
+        String[] titulos = {"Clientes", "Peliculas", "Funciones"};
+
+        int[] iconos = {
+                R.drawable.client,
+                R.drawable.movie,
+                R.drawable.function
+        };
+
+        MenuAdapter adapter = new MenuAdapter(this, titulos, iconos);
+        listMenu.setAdapter(adapter);
+
+        listMenu.setOnItemClickListener((AdapterView<?> parent, android.view.View view, int position, long id) -> {
+            switch (position) {
+                case 0:
+                    Toast.makeText(this, "Abrir módulo Estudiante", Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    Toast.makeText(this, "Abrir módulo Curso", Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    Toast.makeText(this, "Abrir módulo Matrícula", Toast.LENGTH_SHORT).show();
+                    break;
+            }
         });
     }
 }
