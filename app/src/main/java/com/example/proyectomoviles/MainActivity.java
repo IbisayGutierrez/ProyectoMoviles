@@ -1,7 +1,10 @@
 package com.example.proyectomoviles;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -17,7 +20,12 @@ public class MainActivity extends AppCompatActivity {
 
         listMenu = findViewById(R.id.ListViewMenu);
 
-        String[] titulos = {"Clientes", "Peliculas", "Funciones"};
+        String[] titulos = {
+                getString(R.string.cliente),
+                getString(R.string.tituloPelicula),
+                getString(R.string.funcion)
+        };
+
 
         int[] iconos = {
                 R.drawable.client,
@@ -31,15 +39,19 @@ public class MainActivity extends AppCompatActivity {
         listMenu.setOnItemClickListener((AdapterView<?> parent, android.view.View view, int position, long id) -> {
             switch (position) {
                 case 0:
-                    Toast.makeText(this, "Abrir módulo Estudiante", Toast.LENGTH_SHORT).show();
+                    Intent intent= new Intent(this,Cliente.class);
+                    startActivity(intent);
                     break;
                 case 1:
-                    Toast.makeText(this, "Abrir módulo Curso", Toast.LENGTH_SHORT).show();
+                    Intent intent1= new Intent(this,Pelicula.class);
+                    startActivity(intent1);
                     break;
                 case 2:
-                    Toast.makeText(this, "Abrir módulo Matrícula", Toast.LENGTH_SHORT).show();
+                    Intent intent2= new Intent(this,Funcion.class);
+                    startActivity(intent2);
                     break;
             }
         });
     }
+
 }

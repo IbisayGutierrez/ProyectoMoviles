@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">ProyectoMoviles</string>
+    <string name="tituloPelicula">Pelicula</string>
+    <string name="titulo">Titulo</string>
+    <string name="codigo">Codigo</string>
+    <string name="duracion">Duración</string>
+    <string name="genero">Genero</string>
+    <string name="bienvenida">Sistema para un cinema</string>
+    <string name="cliente">Cliente</string>
+    <string name="funcion">Funcion</string>
+
+
+    <string name="buscar">Buscar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="guardar">Guardar</string>
+
+
 </resources>

@@ -9,41 +9,30 @@
 
     <ListView
         android:id="@+id/ListViewMenu"
-        android:layout_width="386dp"
-        android:layout_height="542dp"
+        android:layout_width="288dp"
+        android:layout_height="456dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="267dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="22dp"
-        android:hint="Buscar"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.227" />
 
     <Button
         android:id="@+id/btnBuscar"
-        android:layout_width="44dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="6dp"
+        android:layout_width="38dp"
+        android:layout_height="25dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
         android:foreground="@drawable/search"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/txtBuscar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="256dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="69dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="225dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="60dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ListViewMenu">
@@ -57,6 +46,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:foreground="@drawable/add"
+            android:onClick="Agregar"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -93,8 +83,22 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:foreground="@drawable/go_back"
+            android:onClick="Regresar"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/txtBuscar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:hint="@string/buscar"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

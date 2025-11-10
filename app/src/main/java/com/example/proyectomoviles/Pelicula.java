@@ -1,6 +1,8 @@
 package com.example.proyectomoviles;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,4 +23,21 @@ public class Pelicula extends AppCompatActivity {
             return insets;
         });
     }
+
+    public void Regresar(View view)
+    {
+        Intent intent= new Intent(this,MainActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void Agregar(View view)
+    {
+        Intent intent= new Intent(this,CrearPelicula.class);
+        startActivity(intent);
+
+    }
+
+
+
 }

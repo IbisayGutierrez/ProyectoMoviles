@@ -15,6 +15,9 @@
             android:name=".CrearCliente"
             android:exported="false" />
         <activity
+            android:name=".CrearPelicula"
+            android:exported="false" />
+        <activity
             android:name=".InicioSesion"
             android:exported="false" />
         <activity
