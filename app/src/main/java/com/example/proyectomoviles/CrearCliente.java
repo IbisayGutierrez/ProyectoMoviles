@@ -70,7 +70,7 @@ public class CrearCliente extends AppCompatActivity {
             ContentValues registro = new ContentValues();
             registro.put("cedula", cedula);
             registro.put("nombre", nombre);
-            registro.put("contra", contra);
+            registro.put("contraseña", contra);
             registro.put("telefono", telefono);
             registro.put("correo", correo);
             BaseDeDatos.insert("cliente", null, registro);
