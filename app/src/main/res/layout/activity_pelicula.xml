@@ -70,6 +70,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:foreground="@drawable/delete_disable"
+            android:onClick="Eliminar"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent" />
 

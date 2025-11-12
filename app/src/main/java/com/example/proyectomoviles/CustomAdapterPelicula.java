@@ -27,7 +27,7 @@ public class CustomAdapterPelicula extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return position;
+        return lst.get(position);
     }
 
     @Override
@@ -57,4 +57,9 @@ public class CustomAdapterPelicula extends BaseAdapter {
         return view;
 
     }
+    public void remove(Pelicula pelicula) {
+        lst.remove(pelicula);
+        notifyDataSetChanged();
+    }
+
 }

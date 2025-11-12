@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ public class PeliculaActivity extends AppCompatActivity {
     CustomAdapterPelicula adapter;
     ArrayList<Pelicula> datos;
     int itemseleccionado = -1;
+    Button editar, eliminar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,32 +39,33 @@ public class PeliculaActivity extends AppCompatActivity {
             return insets;
         });
         lista = findViewById(R.id.ListViewMenu);
+        inicializarBtn();
 
         datos = new ArrayList<>();
         adapter = new CustomAdapterPelicula(this, datos);
         lista.setAdapter(adapter);
+
         cargarPeliculas();
+
         lista.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
             itemseleccionado = position;
 
             for (int i = 0; i < lista.getChildCount(); i++) {
                 lista.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
             }
-
             view.setBackgroundColor(Color.GREEN);
+            activarBtn();
         });
     }
 
-    public void Regresar(View view)
-    {
-        Intent intent= new Intent(this,MainActivity.class);
+    public void Regresar(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 
     }
 
-    public void Agregar(View view)
-    {
-        Intent intent= new Intent(this,CrearPelicula.class);
+    public void Agregar(View view) {
+        Intent intent = new Intent(this, CrearPelicula.class);
         startActivity(intent);
 
     }
@@ -87,5 +91,59 @@ public class PeliculaActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    public void Eliminar(View view) {
+        if (itemseleccionado >= 0) {
+            Pelicula peliculaSeleccionada = (Pelicula) adapter.getItem(itemseleccionado);
 
+            EliminarPorCodigo(peliculaSeleccionada.getCodigo());
+
+            adapter.remove(peliculaSeleccionada);
+            adapter.notifyDataSetChanged();
+
+            View itemresaltado = lista.getChildAt(itemseleccionado);
+            if (itemresaltado != null) {
+                itemresaltado.setBackgroundColor(0);
+            }
+            itemseleccionado = -1;
+        } else {
+            Toast.makeText(getApplicationContext(), "Debe seleccionar un item", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void EliminarPorCodigo(int codigo) {
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 1);
+        SQLiteDatabase BaseDatos = admin.getWritableDatabase();
+        String codigoString = String.valueOf(codigo);
+        if (codigo > 0) {
+            int registrosEliminados = BaseDatos.delete("pelicula", "codigo=?", new String[]{codigoString});
+            BaseDatos.close();
+
+            if (registrosEliminados > 0) {
+                Toast.makeText(getApplicationContext(), "Registros eliminados correctamente", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "Falta el nombre para eliminar", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void inicializarBtn() {
+        editar = findViewById(R.id.btnEditar);
+        eliminar = findViewById(R.id.btnEliminar);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            editar.setForeground(getDrawable(R.drawable.edit_disable));
+            eliminar.setForeground(getDrawable(R.drawable.delete_disable));
+        }
+        editar.setEnabled(false);
+        eliminar.setEnabled(false);
+    }
+
+    private void activarBtn() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            editar.setForeground(getDrawable(R.drawable.edit_enable));
+            eliminar.setForeground(getDrawable(R.drawable.delete_enable));
+        }
+        editar.setEnabled(true);
+        eliminar.setEnabled(true);
+
+    }
 }
