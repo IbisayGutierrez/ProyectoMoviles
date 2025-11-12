@@ -1,6 +1,8 @@
 package com.example.proyectomoviles;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class Cliente extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +23,19 @@ public class Cliente extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    public void Regresar(View view)
+    {
+        Intent intent= new Intent(this,MainActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void Agregar(View view)
+    {
+        Intent intent= new Intent(this,CrearCliente.class);
+        startActivity(intent);
+
     }
 }

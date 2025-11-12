@@ -10,6 +10,18 @@
     <string name="cliente">Client</string>
     <string name="funcion">Function</string>
 
+    <string name="nombre">Name</string>
+    <string name="cedula">ID</string>
+    <string name="correo">Email</string>
+    <string name="telefono">Phone</string>
+    <string name="contraseña">Password</string>
+
+    <string name="iniciar">Login</string>
+    <string name="bienvenido">Welcome to CINEVERSE</string>
+    <string name="NoCuenta">Dont you have an account?</string>
+    <string name="Registrar">Register here</string>
+
+
     <string name="buscar">Search</string>
     <string name="cancelar">Cancel</string>
     <string name="guardar">Save</string>

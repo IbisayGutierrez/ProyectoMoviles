@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toStartOf="@+id/txtTitulo"
+        app:layout_constraintEnd_toStartOf="@+id/txtNombre"
         app:layout_constraintHorizontal_bias="0.861"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
@@ -25,7 +25,7 @@
         android:layout_marginStart="169dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="180dp"
-        android:text="Cliente"
+        android:text="@string/cliente"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -33,12 +33,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txtCodigo"
+        android:id="@+id/txtCedula"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Cedula"
+        android:hint="@string/cedula"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -46,43 +46,43 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewPelicula" />
 
     <EditText
-        android:id="@+id/txtTitulo"
+        android:id="@+id/txtNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Nombre"
+        android:hint="@string/nombre"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCodigo" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCedula" />
 
     <EditText
-        android:id="@+id/txtEmail"
+        android:id="@+id/txtCorreo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/correo"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
 
     <EditText
-        android:id="@+id/txtGenero"
+        android:id="@+id/txtTelefono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Telefono"
+        android:hint="@string/telefono"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCorreo" />
 
     <EditText
         android:id="@+id/txtContra"
@@ -90,12 +90,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Contraseña"
+        android:hint="@string/contraseña"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtGenero" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTelefono" />
 
     <Button
         android:id="@+id/btnGuardar"
@@ -103,7 +103,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="104dp"
         android:layout_marginEnd="50dp"
-        android:text="Guardar"
+        android:onClick="login"
+        android:text="@string/guardar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtContra" />
 
@@ -113,7 +114,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="104dp"
-        android:text="Cancelar"
+        android:onClick="Regresar"
+        android:text="@string/cancelar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtContra" />
 
@@ -122,7 +124,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
-        app:layout_constraintEnd_toStartOf="@+id/txtCodigo"
+        app:layout_constraintEnd_toStartOf="@+id/txtCedula"
         app:layout_constraintHorizontal_bias="0.861"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -144,7 +146,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toStartOf="@+id/txtEmail"
+        app:layout_constraintEnd_toStartOf="@+id/txtCorreo"
         app:layout_constraintHorizontal_bias="0.857"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
@@ -155,7 +157,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toStartOf="@+id/txtGenero"
+        app:layout_constraintEnd_toStartOf="@+id/txtTelefono"
         app:layout_constraintHorizontal_bias="0.857"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7"
