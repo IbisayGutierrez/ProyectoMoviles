@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Cliente">
+    tools:context=".ClienteActivity">
 
     <EditText
         android:id="@+id/txtBuscar2"
@@ -84,6 +84,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:foreground="@drawable/delete_disable"
+            android:onClick="Eliminar"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent" />
 

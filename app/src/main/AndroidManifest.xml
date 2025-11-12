@@ -18,13 +18,13 @@
             android:name=".CrearPelicula"
             android:exported="false" />
         <activity
-            android:name=".InicioSesion"
+            android:name=".InicioSesionActivity"
             android:exported="false" />
         <activity
             android:name=".PeliculaActivity"
             android:exported="false" />
         <activity
-            android:name=".Cliente"
+            android:name=".ClienteActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

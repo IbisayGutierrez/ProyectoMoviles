@@ -1,41 +1,33 @@
 package com.example.proyectomoviles;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
+public class Cliente {
+    private String cedula;
+    private String nombre;
+    private String telefono;
+    private String correo;
+    private String contraseña;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-public class Cliente extends AppCompatActivity {
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_cliente);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+    public Cliente(String cedula, String nombre, String telefono, String correo) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.contraseña = null;
+    }
+    public String getCedula() {
+        return cedula;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public String getTelefono() {
+        return telefono;
+    }
+    public String getCorreo() {
+        return correo;
+    }
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void Regresar(View view)
-    {
-        Intent intent= new Intent(this,MainActivity.class);
-        startActivity(intent);
-
-    }
-
-    public void Agregar(View view)
-    {
-        Intent intent= new Intent(this,CrearCliente.class);
-        startActivity(intent);
-
-    }
 }

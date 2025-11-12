@@ -14,6 +14,7 @@ public class AdminDB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table pelicula (codigo integer primary key , titulo text, duracion integer, genero text)");
+        db.execSQL("create table cliente (cedula text primary key , nombre text, correo text, telefono text, contraseña text)");
 
     }
 

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         listMenu.setOnItemClickListener((AdapterView<?> parent, android.view.View view, int position, long id) -> {
             switch (position) {
                 case 0:
-                    Intent intent= new Intent(this,Cliente.class);
+                    Intent intent= new Intent(this, ClienteActivity.class);
                     startActivity(intent);
                     break;
                 case 1:
