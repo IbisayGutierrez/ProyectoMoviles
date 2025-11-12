@@ -82,6 +82,7 @@
         android:layout_marginStart="108dp"
         android:layout_marginTop="169dp"
         android:layout_marginEnd="50dp"
+        android:onClick="Insertar"
         android:text="@string/guardar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnCancelar"

@@ -4,10 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case 1:
-                    Intent intent1= new Intent(this,Pelicula.class);
+                    Intent intent1= new Intent(this, PeliculaActivity.class);
                     startActivity(intent1);
                     break;
                 case 2:

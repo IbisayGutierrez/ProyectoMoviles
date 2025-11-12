@@ -1,43 +1,27 @@
 package com.example.proyectomoviles;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
+public class Pelicula {
+        private int codigo;
+        private String titulo;
+        private int duracion;
+        private String genero;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-public class Pelicula extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_pelicula);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-    }
-
-    public void Regresar(View view)
-    {
-        Intent intent= new Intent(this,MainActivity.class);
-        startActivity(intent);
-
-    }
-
-    public void Agregar(View view)
-    {
-        Intent intent= new Intent(this,CrearPelicula.class);
-        startActivity(intent);
-
-    }
-
-
-
+        public Pelicula(int codigo, String titulo, int duracion, String genero) {
+            this.codigo = codigo;
+            this.titulo = titulo;
+            this.duracion = duracion;
+            this.genero = genero;
+        }
+        public int getCodigo() {
+            return codigo;
+        }
+        public String getTitulo() {
+            return titulo;
+        }
+        public int getDuracion() {
+            return duracion;
+        }
+        public String getGenero() {
+            return genero;
+        }
 }

@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class CustomAdapter extends BaseAdapter {
+public class CustomAdapterPelicula extends BaseAdapter {
 
     Context context;
     List<Pelicula> lst;
 
-    public CustomAdapter(Context context, List<Pelicula> lst) {
+    public CustomAdapterPelicula(Context context, List<Pelicula> lst) {
         this.context = context;
         this.lst = lst;
     }
@@ -37,22 +37,22 @@ public class CustomAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup parent) {
-        ImageView ImageViewContacto;
-        TextView TextViewNombre;
-        TextView TextViewDes;
+        ImageView ImageViewPelicula;
+        TextView TextViewCodigo;
+        TextView TextViewTitulo;
 
         Pelicula p=lst.get(i);
 
         if (view==null)
             view= LayoutInflater.from(context).inflate(R.layout.listview_personalizado,null);
 
-        ImageViewContacto=view.findViewById(R.id.imageViewContacto);
-        TextViewNombre=view.findViewById(R.id.textViewNombre);
-        TextViewDes=view.findViewById(R.id.textViewDes);
+        ImageViewPelicula=view.findViewById(R.id.imageViewContacto);
+        TextViewCodigo=view.findViewById(R.id.textViewNombre);
+        TextViewTitulo=view.findViewById(R.id.textViewDes);
 
-        //ImageViewContacto.setImageResource(p.imagen);
-        //TextViewNombre.setText(p.nombre);
-       // TextViewDes.setText(p.Des);
+        ImageViewPelicula.setImageResource(R.drawable.cineverse);
+        TextViewCodigo.setText(String.valueOf(p.getCodigo()));
+        TextViewTitulo.setText(p.getTitulo());
 
         return view;
 
