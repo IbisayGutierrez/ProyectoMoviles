@@ -60,4 +60,14 @@ public class CustomAdapterCliente extends BaseAdapter {
         lst.remove(cliente);
         notifyDataSetChanged();
     }
+
+    public void clear() {
+        lst.clear();
+        notifyDataSetChanged();
+    }
+
+    public void add(Cliente cliente) {
+        lst.add(cliente);
+        notifyDataSetChanged();
+    }
 }

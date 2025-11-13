@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,6 +28,8 @@ public class ClienteActivity extends AppCompatActivity {
     int itemseleccionado = -1;
     Button editar, eliminar;
 
+    EditText txtBuscar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class ClienteActivity extends AppCompatActivity {
         });
         lista = findViewById(R.id.ListViewCliente);
         inicializarBtn();
+        txtBuscar = findViewById(R.id.txtBuscar2);
 
         datos = new ArrayList<>();
         adapter = new CustomAdapterCliente(this, datos);
@@ -148,5 +152,38 @@ public class ClienteActivity extends AppCompatActivity {
         }
         editar.setEnabled(true);
         eliminar.setEnabled(true);
+    }
+
+    public void Buscar(View view) {
+        String nombretxt = txtBuscar.getText().toString().trim();
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 1);
+        SQLiteDatabase BaseDatos = admin.getWritableDatabase();
+
+        Cursor fila;
+        if (nombretxt.isEmpty()) {
+            fila = BaseDatos.rawQuery("SELECT * FROM cliente", null);
+        } else {
+            fila = BaseDatos.rawQuery("SELECT * FROM cliente WHERE nombre='" + nombretxt + "'", null);
+        }
+
+        adapter.clear();
+
+        if (fila.moveToFirst()) {
+            do {
+                String cedula = fila.getString(0);
+                String nombre = fila.getString(1);
+                String telefono = fila.getString(2);
+                String correo = fila.getString(3);
+
+                Cliente c = new Cliente(cedula, nombre, telefono, correo);
+                adapter.add(c);
+            } while (fila.moveToNext());
+            Toast.makeText(getApplicationContext(), "Registros encontrados", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "No se encontraron registros", Toast.LENGTH_LONG).show();
+        }
+
+        fila.close();
+        BaseDatos.close();
     }
 }
