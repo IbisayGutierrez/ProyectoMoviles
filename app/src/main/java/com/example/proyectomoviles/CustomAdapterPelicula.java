@@ -38,7 +38,7 @@ public class CustomAdapterPelicula extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup parent) {
         ImageView ImageViewPelicula;
-        TextView TextViewCodigo;
+        TextView TextViewDuracion;
         TextView TextViewTitulo;
 
         Pelicula p=lst.get(i);
@@ -47,11 +47,11 @@ public class CustomAdapterPelicula extends BaseAdapter {
             view= LayoutInflater.from(context).inflate(R.layout.listview_personalizado,null);
 
         ImageViewPelicula=view.findViewById(R.id.imageViewContacto);
-        TextViewCodigo=view.findViewById(R.id.textViewNombre);
-        TextViewTitulo=view.findViewById(R.id.textViewDes);
+        TextViewDuracion=view.findViewById(R.id.textViewDes);
+        TextViewTitulo=view.findViewById(R.id.textViewNombre);
 
         ImageViewPelicula.setImageResource(R.drawable.cineverse);
-        TextViewCodigo.setText(String.valueOf(p.getCodigo()));
+        TextViewDuracion.setText(String.valueOf(p.getDuracion()) + " minutos");
         TextViewTitulo.setText(p.getTitulo());
 
         return view;
@@ -59,6 +59,16 @@ public class CustomAdapterPelicula extends BaseAdapter {
     }
     public void remove(Pelicula pelicula) {
         lst.remove(pelicula);
+        notifyDataSetChanged();
+    }
+
+    public void clear() {
+        lst.clear();
+        notifyDataSetChanged();
+    }
+
+    public void add(Pelicula pelicula) {
+        lst.add(pelicula);
         notifyDataSetChanged();
     }
 

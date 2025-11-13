@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class PeliculaActivity extends AppCompatActivity {
     ArrayList<Pelicula> datos;
     int itemseleccionado = -1;
     Button editar, eliminar;
+    EditText txtBuscar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class PeliculaActivity extends AppCompatActivity {
             return insets;
         });
         lista = findViewById(R.id.ListViewMenu);
+        txtBuscar = findViewById(R.id.txtBuscar);
         inicializarBtn();
 
         datos = new ArrayList<>();
@@ -145,5 +148,38 @@ public class PeliculaActivity extends AppCompatActivity {
         editar.setEnabled(true);
         eliminar.setEnabled(true);
 
+    }
+
+    public void Buscar(View view) {
+        String nombretxt = txtBuscar.getText().toString().trim();
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 1);
+        SQLiteDatabase BaseDatos = admin.getWritableDatabase();
+
+        Cursor fila;
+        if (nombretxt.isEmpty()) {
+            fila = BaseDatos.rawQuery("SELECT * FROM pelicula", null);
+        } else {
+            fila = BaseDatos.rawQuery("SELECT * FROM pelicula WHERE titulo='" + nombretxt + "'", null);
+        }
+
+        adapter.clear();
+
+        if (fila.moveToFirst()) {
+            do {
+                int codigo = fila.getInt(0);
+                String titulo = fila.getString(1);
+                int duracion = fila.getInt(2);
+                String genero = fila.getString(3);
+
+                Pelicula p = new Pelicula(codigo, titulo, duracion, genero);
+                adapter.add(p);
+            } while (fila.moveToNext());
+            Toast.makeText(getApplicationContext(), "Registros encontrados", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "No se encontraron registros", Toast.LENGTH_LONG).show();
+        }
+
+        fila.close();
+        BaseDatos.close();
     }
 }

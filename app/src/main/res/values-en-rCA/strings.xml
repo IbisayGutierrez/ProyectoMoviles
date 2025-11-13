@@ -4,7 +4,7 @@
     <string name="tituloPelicula">Movie</string>
     <string name="titulo">Title</string>
     <string name="codigo">Code</string>
-    <string name="duracion">Duration</string>
+    <string name="duracion">Duration (Minutes)</string>
     <string name="genero">Genre</string>
     <string name="bienvenida">System for a cinema</string>
     <string name="cliente">Client</string>
