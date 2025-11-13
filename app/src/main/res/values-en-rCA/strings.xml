@@ -9,6 +9,8 @@
     <string name="bienvenida">System for a cinema</string>
     <string name="cliente">Client</string>
     <string name="funcion">Function</string>
+    <string name="minutos">minutes</string>
+
 
     <string name="nombre">Name</string>
     <string name="cedula">ID</string>

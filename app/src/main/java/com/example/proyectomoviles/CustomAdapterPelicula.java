@@ -51,7 +51,7 @@ public class CustomAdapterPelicula extends BaseAdapter {
         TextViewTitulo=view.findViewById(R.id.textViewNombre);
 
         ImageViewPelicula.setImageResource(R.drawable.cineverse);
-        TextViewDuracion.setText(String.valueOf(p.getDuracion()) + " minutos");
+        TextViewDuracion.setText(String.valueOf(p.getDuracion()) + " " + context.getString(R.string.minutos));
         TextViewTitulo.setText(p.getTitulo());
 
         return view;
