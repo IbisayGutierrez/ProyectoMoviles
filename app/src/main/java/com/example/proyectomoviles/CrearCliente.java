@@ -79,17 +79,9 @@ public class CrearCliente extends AppCompatActivity {
         fila.close();
         BaseDeDatos.close();
     }
-    public void Regresar(View view)
-    {
-        Intent intent= new Intent(this, ClienteActivity.class);
-        startActivity(intent);
-
+    public void Regresar(View view) {
+        finish();
     }
 
-    public void login(View view)
-    {
-        Intent intent= new Intent(this, InicioSesionActivity.class);
-        startActivity(intent);
 
-    }
 }

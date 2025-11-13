@@ -38,6 +38,7 @@
         android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
         android:foreground="@drawable/search"
+        android:onClick="Buscar"
         app:layout_constraintStart_toEndOf="@+id/txtBuscar2"
         app:layout_constraintTop_toTopOf="parent" />
 

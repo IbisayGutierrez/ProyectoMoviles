@@ -17,6 +17,7 @@
     <string name="correo">Email</string>
     <string name="telefono">Phone</string>
     <string name="contraseña">Password</string>
+    <string name="regresar">Go back</string>
 
     <string name="iniciar">Login</string>
     <string name="bienvenido">Welcome to CINEVERSE</string>
