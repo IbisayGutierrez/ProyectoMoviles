@@ -60,6 +60,14 @@ public class ClienteActivity extends AppCompatActivity {
             view.setBackgroundColor(0x9934B5E4);
             activarBtn();
         });
+
+
+    }
+
+    protected void onResume() {
+        super.onResume();
+        datos.clear();
+        cargarClientes();
     }
 
     public void Regresar(View view)
