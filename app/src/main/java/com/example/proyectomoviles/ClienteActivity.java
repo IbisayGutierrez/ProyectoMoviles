@@ -194,4 +194,22 @@ public class ClienteActivity extends AppCompatActivity {
         fila.close();
         BaseDatos.close();
     }
+
+    public void Editar(View view) {
+        if (itemseleccionado >= 0) {
+            Cliente clienteSeleccionado = (Cliente) adapter.getItem(itemseleccionado);
+
+            Intent intent = new Intent(this, CrearCliente.class);
+            intent.putExtra("cedula", clienteSeleccionado.getCedula());
+            intent.putExtra("nombre", clienteSeleccionado.getNombre());
+            intent.putExtra("telefono", clienteSeleccionado.getTelefono());
+            intent.putExtra("correo", clienteSeleccionado.getCorreo());
+            // Indicamos que estamos en modo edición
+            intent.putExtra("modoEdicion", true);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Por favor seleccione un cliente para editar", Toast.LENGTH_LONG).show();
+        }
+    }
+
 }
