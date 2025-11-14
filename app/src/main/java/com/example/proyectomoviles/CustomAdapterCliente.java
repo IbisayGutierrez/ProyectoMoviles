@@ -37,7 +37,7 @@ public class CustomAdapterCliente extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup parent) {
         ImageView ImageViewCliente;
-        TextView TextViewCedula;
+        TextView TextViewCorreo;
         TextView TextViewNombre;
 
         Cliente c=lst.get(i);
@@ -46,12 +46,12 @@ public class CustomAdapterCliente extends BaseAdapter {
             view= LayoutInflater.from(context).inflate(R.layout.listview_personalizado,null);
 
         ImageViewCliente=view.findViewById(R.id.imageViewContacto);
-        TextViewCedula=view.findViewById(R.id.textViewNombre);
-        TextViewNombre=view.findViewById(R.id.textViewDes);
+        TextViewNombre=view.findViewById(R.id.textViewNombre);
+        TextViewCorreo=view.findViewById(R.id.textViewDes);
 
         ImageViewCliente.setImageResource(R.drawable.client);
-        TextViewCedula.setText(String.valueOf(c.getCedula()));
         TextViewNombre.setText(c.getNombre());
+        TextViewCorreo.setText(c.getCorreo());
 
         return view;
 
