@@ -18,16 +18,13 @@
             android:name=".CrearPelicula"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true" />
-        <activity
             android:name=".PeliculaActivity"
             android:exported="false" />
         <activity
             android:name=".ClienteActivity"
             android:exported="false" />
         <activity
-            android:name=".InicioSesionActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

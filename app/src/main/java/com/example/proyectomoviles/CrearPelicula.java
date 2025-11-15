@@ -118,11 +118,8 @@ public class CrearPelicula extends AppCompatActivity {
         BaseDatos.close();
     }
 
-    public void Regresar(View view)
-    {
-        Intent intent= new Intent(this, PeliculaActivity.class);
-        startActivity(intent);
-
+    public void Regresar(View view) {
+        finish();
     }
 
 }

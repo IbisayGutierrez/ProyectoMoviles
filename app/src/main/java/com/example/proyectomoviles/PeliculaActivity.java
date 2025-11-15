@@ -199,4 +199,9 @@ public class PeliculaActivity extends AppCompatActivity {
             Toast.makeText(this, "Por favor seleccione una película para editar", Toast.LENGTH_LONG).show();
         }
     }
+    protected void onResume() {
+        super.onResume();
+        datos.clear();
+        cargarPeliculas();
+    }
 }
