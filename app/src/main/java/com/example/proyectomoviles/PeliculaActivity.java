@@ -182,4 +182,21 @@ public class PeliculaActivity extends AppCompatActivity {
         fila.close();
         BaseDatos.close();
     }
+
+    public void Editar(View view) {
+        if (itemseleccionado >= 0) {
+            Pelicula peliculaSeleccionada = (Pelicula) adapter.getItem(itemseleccionado);
+
+            Intent intent = new Intent(this, CrearPelicula.class);
+            intent.putExtra("codigo", peliculaSeleccionada.getCodigo());
+            intent.putExtra("titulo", peliculaSeleccionada.getTitulo());
+            intent.putExtra("duracion", peliculaSeleccionada.getDuracion());
+            intent.putExtra("genero", peliculaSeleccionada.getGenero());
+            intent.putExtra("modoEdicion", true);
+
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Por favor seleccione una película para editar", Toast.LENGTH_LONG).show();
+        }
+    }
 }

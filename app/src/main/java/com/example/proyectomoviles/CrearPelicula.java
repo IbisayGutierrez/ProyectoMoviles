@@ -18,6 +18,8 @@ import androidx.core.view.WindowInsetsCompat;
 public class CrearPelicula extends AppCompatActivity {
 
     EditText txtCodigo, txtTitulo,txtDuracion, txtGenero;
+    boolean modoEdicion = false;
+    int codigoOriginal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,18 @@ public class CrearPelicula extends AppCompatActivity {
         txtTitulo = findViewById(R.id.txtTitulo);
         txtDuracion = findViewById(R.id.txtDuracion);
         txtGenero = findViewById(R.id.txtGenero);
+
+        Intent intent = getIntent();
+        if (intent != null && intent.getBooleanExtra("modoEdicion", false)) {
+
+            modoEdicion = true;
+            codigoOriginal = intent.getIntExtra("codigo", -1);
+            txtCodigo.setText(String.valueOf(codigoOriginal));
+            txtTitulo.setText(intent.getStringExtra("titulo"));
+            txtDuracion.setText(String.valueOf(intent.getIntExtra("duracion", 0)));
+            txtGenero.setText(intent.getStringExtra("genero"));
+            txtCodigo.setEnabled(false);
+        }
     }
 
     public void Insertar(View view) {
@@ -42,7 +56,11 @@ public class CrearPelicula extends AppCompatActivity {
         titulo = txtTitulo.getText().toString();
         duracion = Integer.parseInt(txtDuracion.getText().toString());
         genero = txtGenero.getText().toString();
-        if (codigo > 0||!titulo.isEmpty()||duracion > 0||!genero.isEmpty()) {
+        if (modoEdicion) {
+            Actualizar();
+            finish();
+            return;
+        }else if (codigo > 0||!titulo.isEmpty()||duracion > 0||!genero.isEmpty()) {
             Registrar(codigo,titulo,duracion,genero);
             txtCodigo.setText("");
             txtTitulo.setText("");
@@ -72,6 +90,31 @@ public class CrearPelicula extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "La película se insertó correctamente", Toast.LENGTH_LONG).show();
         }
         fila.close();
+        BaseDatos.close();
+    }
+
+    public void Actualizar() {
+
+        String nuevoTitulo = txtTitulo.getText().toString().trim();
+        String nuevaDuracionTxt = txtDuracion.getText().toString().trim();
+        String nuevoGenero = txtGenero.getText().toString().trim();
+        int nuevaDuracion = Integer.parseInt(nuevaDuracionTxt);
+
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 1);
+        SQLiteDatabase BaseDatos = admin.getWritableDatabase();
+
+        ContentValues registro = new ContentValues();
+        registro.put("titulo", nuevoTitulo);
+        registro.put("duracion", nuevaDuracion);
+        registro.put("genero", nuevoGenero);
+
+        int filas = BaseDatos.update("pelicula", registro, "codigo=?", new String[]{String.valueOf(codigoOriginal)});
+
+        if (filas > 0) {
+            Toast.makeText(this, "Película actualizada correctamente", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "No se pudo actualizar la película", Toast.LENGTH_LONG).show();
+        }
         BaseDatos.close();
     }
 
