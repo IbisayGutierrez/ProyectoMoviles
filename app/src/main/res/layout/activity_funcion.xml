@@ -1,6 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PELÍCULA"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <EditText
+            android:id="@+id/txtCodigoPelicula"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Código película"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btnBuscarPelicula"
+            android:onClick="btnBuscarPelicula_Click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buscar Película" />
+
+        <TextView
+            android:id="@+id/txtTituloPelicula"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Título película"
+            android:textStyle="bold"
+            android:textColor="#4CAF50"
+            android:paddingBottom="16dp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FECHA Y HORA"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <EditText
+            android:id="@+id/txtFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Fecha"
+            android:focusable="false" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="seleccionarFecha"
+            android:text="Seleccionar Fecha" />
+
+        <EditText
+            android:id="@+id/txtHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Hora"
+            android:focusable="false" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="seleccionarHora"
+            android:text="Seleccionar Hora" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CLIENTE"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
+
+        <EditText
+            android:id="@+id/txtCedula"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cédula" />
+
+        <Button
+            android:id="@+id/btnBuscarCliente"
+            android:onClick="btnBuscarCliente_Click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buscar Cliente" />
+
+        <TextView
+            android:id="@+id/txtNombreCliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre cliente"
+            android:textStyle="bold"
+            android:textColor="#4CAF50"
+            android:paddingBottom="8dp" />
+
+
+        <EditText
+            android:id="@+id/txtAsiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Número de asiento (ej: A1, B5, C10)"
+            android:inputType="textCapCharacters" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp">
+
+            <Button
+                android:id="@+id/btnAgregar"
+                android:onClick="btnAgregar_Click"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Agregar" />
+
+            <Button
+                android:id="@+id/btnEditar"
+                android:onClick="btnEditar_Click"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Editar" />
+
+            <Button
+                android:id="@+id/btnEliminar"
+                android:onClick="btnEliminar_Click"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Eliminar" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Funciones agregadas:"
+            android:textStyle="bold"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
+
+        <ListView
+            android:id="@+id/listDetalleFuncion"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+
+
+        <Button
+            android:id="@+id/btnGuardarFuncion"
+            android:onClick="btnGuardarFuncion_Click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GUARDAR FUNCIONES EN BD"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/btnConsultar"
+            android:onClick="btnConsultar_Click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VER FUNCIONES GUARDADAS" />
+
+        <Button
+            android:id="@+id/btnLimpiar"
+            android:onClick="btnLimpiar_Click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LIMPIAR" />
+
+        <Button
+            android:id="@+id/btnSalir"
+            android:onClick="btnSalir_Click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SALIR" />
+
+    </LinearLayout>
+
+</ScrollView>
