@@ -85,7 +85,7 @@ public class ClienteActivity extends AppCompatActivity {
     }
 
     private void cargarClientes() {
-        AdminDB admin = new AdminDB(this,"Proyecto", null, 1);
+        AdminDB admin = new AdminDB(this,"Proyecto", null, 2);
         SQLiteDatabase bd = admin.getReadableDatabase();
         Cursor fila = bd.rawQuery("SELECT cedula, nombre, telefono, correo FROM cliente", null);
         if (fila.moveToFirst()){
@@ -125,7 +125,7 @@ public class ClienteActivity extends AppCompatActivity {
     }
 
     public void EliminarPorCedula(String cedula) {
-        AdminDB admin = new AdminDB(this, "Proyecto", null, 1);
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
         SQLiteDatabase BaseDatos = admin.getWritableDatabase();
 
         if (cedula != null && !cedula.isEmpty()) {
@@ -164,7 +164,7 @@ public class ClienteActivity extends AppCompatActivity {
 
     public void Buscar(View view) {
         String nombretxt = txtBuscar.getText().toString().trim();
-        AdminDB admin = new AdminDB(this, "Proyecto", null, 1);
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
         SQLiteDatabase BaseDatos = admin.getWritableDatabase();
 
         Cursor fila;

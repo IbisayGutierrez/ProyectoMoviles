@@ -37,7 +37,7 @@ public class ConsultarFunciones extends AppCompatActivity {
         try {
             setContentView(R.layout.activity_consultar_funciones);
 
-            conn = new AdminDB(this, "Proyecto", null, 1);
+            conn = new AdminDB(this, "Proyecto", null, 2);
 
             inicializarVistas();
             cargarTodasLasFunciones();
