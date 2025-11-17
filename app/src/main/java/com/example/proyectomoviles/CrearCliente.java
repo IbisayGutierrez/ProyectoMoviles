@@ -17,6 +17,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class CrearCliente extends AppCompatActivity {
     EditText txtCedula, txtNombre, txtContra, txtTelefono, txtCorreo;
+
+
     boolean modoEdicion=false;
     String cedulaOriginal;
 

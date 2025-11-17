@@ -5,14 +5,14 @@ public class Cliente {
     private String nombre;
     private String telefono;
     private String correo;
-    private String contraseña;
+    private String contrasena;
 
     public Cliente(String cedula, String nombre, String telefono, String correo) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
         this.correo = correo;
-        this.contraseña = null;
+        this.contrasena = null;
     }
     public String getCedula() {
         return cedula;
@@ -26,8 +26,8 @@ public class Cliente {
     public String getCorreo() {
         return correo;
     }
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
 }
