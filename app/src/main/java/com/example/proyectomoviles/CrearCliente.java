@@ -87,7 +87,7 @@ public class CrearCliente extends AppCompatActivity {
 
     public void Registrar(String cedula, String nombre, String contra, String telefono, String correo)
     {
-        AdminDB admin = new AdminDB (this, "Proyecto", null, 1);
+        AdminDB admin = new AdminDB (this, "Proyecto", null, 2);
         SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
         Cursor fila = BaseDeDatos.rawQuery("select cedula from cliente where cedula='"+cedula+"'", null);
         if (fila.moveToFirst()){

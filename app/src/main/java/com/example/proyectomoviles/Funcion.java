@@ -36,7 +36,7 @@ public class Funcion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_funcion);
 
-        conn = new AdminDB(this, "Proyecto", null, 1);
+        conn = new AdminDB(this, "Proyecto", null, 2);
 
         txtCodigoPelicula = findViewById(R.id.txtCodigoPelicula);
         txtFecha = findViewById(R.id.txtFecha);

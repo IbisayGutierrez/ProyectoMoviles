@@ -75,7 +75,7 @@ public class CrearPelicula extends AppCompatActivity {
 
     public void Registrar(int codigo, String titulo, int duracion, String genero)
     {
-        AdminDB admin = new AdminDB (this, "Proyecto", null, 1);
+        AdminDB admin = new AdminDB (this, "Proyecto", null, 2);
         SQLiteDatabase BaseDatos = admin.getWritableDatabase();
         Cursor fila = BaseDatos.rawQuery("SELECT codigo FROM pelicula WHERE codigo = " + codigo, null);
         if (fila.moveToFirst()) {
@@ -100,7 +100,7 @@ public class CrearPelicula extends AppCompatActivity {
         String nuevoGenero = txtGenero.getText().toString().trim();
         int nuevaDuracion = Integer.parseInt(nuevaDuracionTxt);
 
-        AdminDB admin = new AdminDB(this, "Proyecto", null, 1);
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
         SQLiteDatabase BaseDatos = admin.getWritableDatabase();
 
         ContentValues registro = new ContentValues();

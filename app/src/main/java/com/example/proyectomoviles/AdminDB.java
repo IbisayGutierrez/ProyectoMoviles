@@ -22,7 +22,11 @@ public class AdminDB extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+            db.execSQL("DROP TABLE IF EXISTS detalle_funcion");
+            db.execSQL("DROP TABLE IF EXISTS funcion");
+            db.execSQL("DROP TABLE IF EXISTS cliente");
+            db.execSQL("DROP TABLE IF EXISTS pelicula");
+            onCreate(db);
     }
     public long insertarFuncion(String fecha, String hora, int codigo) {
         SQLiteDatabase db = this.getWritableDatabase();

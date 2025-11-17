@@ -74,7 +74,7 @@ public class PeliculaActivity extends AppCompatActivity {
     }
 
     private void cargarPeliculas() {
-        AdminDB admin = new AdminDB(this, "Proyecto", null, 1);
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
         SQLiteDatabase bd = admin.getReadableDatabase();
         Cursor fila = bd.rawQuery("SELECT codigo, titulo, duracion, genero FROM pelicula", null);
         if (fila.moveToFirst()) {
@@ -114,7 +114,7 @@ public class PeliculaActivity extends AppCompatActivity {
     }
 
     public void EliminarPorCodigo(int codigo) {
-        AdminDB admin = new AdminDB(this, "Proyecto", null, 1);
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
         SQLiteDatabase BaseDatos = admin.getWritableDatabase();
         String codigoString = String.valueOf(codigo);
         if (codigo > 0) {
@@ -152,7 +152,7 @@ public class PeliculaActivity extends AppCompatActivity {
 
     public void Buscar(View view) {
         String nombretxt = txtBuscar.getText().toString().trim();
-        AdminDB admin = new AdminDB(this, "Proyecto", null, 1);
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
         SQLiteDatabase BaseDatos = admin.getWritableDatabase();
 
         Cursor fila;

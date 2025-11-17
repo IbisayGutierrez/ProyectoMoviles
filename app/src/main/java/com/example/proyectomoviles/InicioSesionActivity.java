@@ -48,7 +48,7 @@ public class InicioSesionActivity extends AppCompatActivity {
             return;
         }
 
-        AdminDB admin = new AdminDB(this, "Proyecto", null, 1);
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
         SQLiteDatabase db = admin.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(
