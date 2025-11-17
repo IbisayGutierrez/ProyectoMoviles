@@ -46,13 +46,13 @@ public class CrearCliente extends AppCompatActivity {
             modoEdicion = true;
             cedulaOriginal = intent.getStringExtra("cedula");
 
-            // Rellenamos los campos con los datos del cliente
+
             txtCedula.setText(intent.getStringExtra("cedula"));
             txtNombre.setText(intent.getStringExtra("nombre"));
             txtTelefono.setText(intent.getStringExtra("telefono"));
             txtCorreo.setText(intent.getStringExtra("correo"));
 
-            // Opcional: no permitir cambiar cédula
+
             txtCedula.setEnabled(false);
 
         }
@@ -68,11 +68,11 @@ public class CrearCliente extends AppCompatActivity {
         telefono = txtTelefono.getText().toString();
         correo = txtCorreo.getText().toString();
         if (modoEdicion) {
-            // 🔹 MODO EDICIÓN: solo actualizamos teléfono, correo y opcionalmente contraseña
+
             Actualizar();
-            finish(); // volvemos a la lista
+            finish();
         } else {
-            // 🔹 MODO CREACIÓN: validamos que todo tenga datos
+
             if (!cedula.isEmpty() && !nombre.isEmpty() && !contra.isEmpty() && !telefono.isEmpty() && !correo.isEmpty()) {
                 Registrar(cedula, nombre, contra, telefono, correo);
                 txtCedula.setText("");
@@ -119,12 +119,12 @@ public class CrearCliente extends AppCompatActivity {
 
         ContentValues registro = new ContentValues();
 
-        // 🔹 Siempre actualizamos nombre, teléfono y correo
+
         registro.put("nombre", nuevoNombre);
         registro.put("telefono", nuevoTelefono);
         registro.put("correo", nuevoCorreo);
 
-        // 🔹 La contraseña SOLO se actualiza si el usuario escribió algo
+        
         if (!nuevaContra.isEmpty()) {
             registro.put("contraseña", nuevaContra);
         }
