@@ -28,4 +28,92 @@
     <string name="buscar">Search</string>
     <string name="cancelar">Cancel</string>
     <string name="guardar">Save</string>
+
+
+
+    <string name="titulo_pelicula">MOVIE</string>
+    <string name="codigo_pelicula">Movie code</string>
+    <string name="buscar_pelicula">Search Movie</string>
+    <string name="titulo_pelicula_placeholder">Movie title</string>
+
+    <string name="fecha_hora">DATE AND TIME</string>
+    <string name="fecha">Date</string>
+    <string name="seleccionar_fecha">Select Date</string>
+    <string name="hora">Time</string>
+    <string name="seleccionar_hora">Select Time</string>
+
+    <string name="buscar_cliente">Search Client</string>
+    <string name="nombre_cliente">Client name</string>
+
+    <string name="asiento">Seat number (e.g.: A1, B5, C10)</string>
+
+    <string name="btn_agregar">Add</string>
+    <string name="btn_editar">Edit</string>
+    <string name="btn_eliminar">Delete</string>
+    <string name="funciones_agregadas">Added functions:</string>
+    <string name="btn_guardar_funciones">SAVE FUNCTIONS TO DB</string>
+    <string name="btn_ver_funciones">VIEW SAVED FUNCTIONS</string>
+    <string name="btn_limpiar">CLEAR</string>
+    <string name="btn_salir">EXIT</string>
+
+    <string name="funciones_guardadas">Saved Functions</string>
+    <string name="buscar_fecha_hint">Search by date (dd/mm/yyyy)</string>
+    <string name="btn_buscar">Search</string>
+    <string name="btn_mostrar_todas">Show All</string>
+    <string name="funciones_label">Functions:</string>
+    <string name="clientes_funcion">Function clients:</string>
+    <string name="btn_volver">Back</string>
+
+    <string name="ingrese_codigo">Enter a movie code</string>
+    <string name="pelicula_encontrada">Movie found</string>
+    <string name="pelicula_no_encontrada">Movie not found</string>
+    <string name="no_existe_pelicula">No movie with that code exists</string>
+    <string name="ingrese_cedula">Enter an ID number</string>
+    <string name="cliente_no_existe">Client does not exist</string>
+    <string name="no_existe_cliente">No client with that ID exists</string>
+    <string name="seleccione_fecha_hora">Select date and time</string>
+    <string name="busque_pelicula_valida">First search for a valid movie</string>
+    <string name="busque_cliente_valido">First search for a valid client</string>
+    <string name="ingrese_asiento">Enter seat number</string>
+    <string name="asiento_ocupado">This seat is already taken for this function</string>
+    <string name="cedula_repetida">This client already has a seat reserved for this function</string>
+    <string name="funcion_agregada">Function added to list</string>
+    <string name="seleccione_funcion">Select a function from the list</string>
+    <string name="titulo_eliminar">Delete</string>
+    <string name="mensaje_eliminar">Do you want to delete this function from the list?</string>
+    <string name="si">Yes</string>
+    <string name="no">No</string>
+    <string name="funcion_eliminada">Function deleted from list</string>
+    <string name="seleccione_para_editar">Select a function from the list to edit</string>
+    <string name="complete_campos">Fill all fields</string>
+    <string name="funcion_actualizada">Function updated</string>
+    <string name="agregar_una_funcion">Add at least one function before saving</string>
+    <string name="titulo_guardar">Save Functions</string>
+    <string name="mensaje_guardar">Do you want to save %d function(s) to the database?</string>
+    <string name="funciones_guardadas_msg">✅ %d function(s) saved</string>
+    <string name="titulo_limpiar">Clear</string>
+    <string name="mensaje_limpiar">Do you want to clear all fields and the list?</string>
+    <string name="titulo_salir">Exit</string>
+    <string name="mensaje_salir">There are unsaved functions. Do you want to exit anyway?</string>
+
+    <string name="ingrese_fecha_buscar">Enter a date to search</string>
+    <string name="encontradas_funciones">Found %d functions</string>
+    <string name="no_hay_funciones">No saved functions</string>
+    <string name="no_funciones_fecha">No functions found with that date</string>
+    <string name="seleccione_funcion_eliminar">Select a function to delete</string>
+    <string name="titulo_eliminar_funcion">Delete Function</string>
+    <string name="mensaje_eliminar_funcion">Are you sure you want to delete this function and all its details?</string>
+    <string name="funcion_eliminada_bd">Function deleted</string>
+    <string name="no_clientes_registrados">No registered clients</string>
+    <string name="sin_cedula">No ID</string>
+    <string name="sin_nombre">No name</string>
+    <string name="sin_asiento">No seat</string>
+    <string name="error_cargar_detalles">Error loading details: %s</string>
+    <string name="error_cargar_clientes">Error loading clients</string>
+    <string name="clientes_count">Clients: %d</string>
+    <string name="no_clientes_funcion">No clients registered for this function</string>
+    <string name="formato_funcion">ID: %1$d | %2$s - %3$s\n%4$s</string>
+    <string name="formato_detalle">%1$s - %2$s | Seat: %3$s</string>
+
+
 </resources>

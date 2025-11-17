@@ -9,11 +9,11 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-
+        <!-- PELÍCULA -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="PELÍCULA"
+            android:text="@string/titulo_pelicula"
             android:textStyle="bold"
             android:textSize="16sp"
             android:paddingBottom="8dp" />
@@ -22,30 +22,30 @@
             android:id="@+id/txtCodigoPelicula"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Código película"
+            android:hint="@string/codigo_pelicula"
             android:inputType="number" />
 
         <Button
             android:id="@+id/btnBuscarPelicula"
-            android:onClick="btnBuscarPelicula_Click"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Buscar Película" />
+            android:onClick="btnBuscarPelicula_Click"
+            android:text="@string/buscar_pelicula" />
 
         <TextView
             android:id="@+id/txtTituloPelicula"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Título película"
+            android:text="@string/titulo_pelicula_placeholder"
             android:textStyle="bold"
             android:textColor="#4CAF50"
             android:paddingBottom="16dp" />
 
-
+        <!-- FECHA Y HORA -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="FECHA Y HORA"
+            android:text="@string/fecha_hora"
             android:textStyle="bold"
             android:textSize="16sp"
             android:paddingBottom="8dp" />
@@ -54,33 +54,33 @@
             android:id="@+id/txtFecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Fecha"
+            android:hint="@string/fecha"
             android:focusable="false" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="seleccionarFecha"
-            android:text="Seleccionar Fecha" />
+            android:text="@string/seleccionar_fecha" />
 
         <EditText
             android:id="@+id/txtHora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Hora"
+            android:hint="@string/hora"
             android:focusable="false" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="seleccionarHora"
-            android:text="Seleccionar Hora" />
+            android:text="@string/seleccionar_hora" />
 
-
+        <!-- CLIENTE -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CLIENTE"
+            android:text="@string/cliente"
             android:textStyle="bold"
             android:textSize="16sp"
             android:paddingTop="16dp"
@@ -90,33 +90,33 @@
             android:id="@+id/txtCedula"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Cédula" />
+            android:hint="@string/cedula" />
 
         <Button
             android:id="@+id/btnBuscarCliente"
             android:onClick="btnBuscarCliente_Click"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Buscar Cliente" />
+            android:text="@string/buscar_cliente" />
 
         <TextView
             android:id="@+id/txtNombreCliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre cliente"
+            android:text="@string/nombre_cliente"
             android:textStyle="bold"
             android:textColor="#4CAF50"
             android:paddingBottom="8dp" />
 
-
+        <!-- ASIENTO -->
         <EditText
             android:id="@+id/txtAsiento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Número de asiento (ej: A1, B5, C10)"
+            android:hint="@string/asiento"
             android:inputType="textCapCharacters" />
 
-
+        <!-- Botones Agregar, Editar, Eliminar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Agregar" />
+                android:text="@string/btn_agregar" />
 
             <Button
                 android:id="@+id/btnEditar"
@@ -137,7 +137,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Editar" />
+                android:text="@string/btn_editar" />
 
             <Button
                 android:id="@+id/btnEliminar"
@@ -145,14 +145,14 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Eliminar" />
+                android:text="@string/btn_eliminar" />
         </LinearLayout>
 
-
+        <!-- Lista de Funciones -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Funciones agregadas:"
+            android:text="@string/funciones_agregadas"
             android:textStyle="bold"
             android:paddingTop="16dp"
             android:paddingBottom="8dp" />
@@ -162,13 +162,13 @@
             android:layout_width="match_parent"
             android:layout_height="250dp" />
 
-
+        <!-- Botones principales -->
         <Button
             android:id="@+id/btnGuardarFuncion"
             android:onClick="btnGuardarFuncion_Click"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="GUARDAR FUNCIONES EN BD"
+            android:text="@string/btn_guardar_funciones"
             android:layout_marginTop="16dp" />
 
         <Button
@@ -176,21 +176,21 @@
             android:onClick="btnConsultar_Click"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="VER FUNCIONES GUARDADAS" />
+            android:text="@string/btn_ver_funciones" />
 
         <Button
             android:id="@+id/btnLimpiar"
             android:onClick="btnLimpiar_Click"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="LIMPIAR" />
+            android:text="@string/btn_limpiar" />
 
         <Button
             android:id="@+id/btnSalir"
             android:onClick="btnSalir_Click"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SALIR" />
+            android:text="@string/btn_salir" />
 
     </LinearLayout>
 

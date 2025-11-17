@@ -37,7 +37,7 @@ public class ConsultarFunciones extends AppCompatActivity {
         try {
             setContentView(R.layout.activity_consultar_funciones);
 
-            conn = new AdminDB(this, "Proyecto", null, 1);
+            conn = new AdminDB(this, "Proyecto", null, 2);
 
             inicializarVistas();
             cargarTodasLasFunciones();
@@ -101,13 +101,13 @@ public class ConsultarFunciones extends AppCompatActivity {
 
                     FuncionCompleta funcion = new FuncionCompleta(id, fecha, hora, codigoPelicula, tituloPelicula);
                     listaFunciones.add(funcion);
-                    listaParaMostrar.add("ID: " + id + " | " + fecha + " - " + hora + "\n" + tituloPelicula);
+                    listaParaMostrar.add(String.format(getString(R.string.formato_funcion), id, fecha, hora, tituloPelicula));
                 } while (cursor.moveToNext());
 
                 adapterFunciones.notifyDataSetChanged();
-                Toast.makeText(this, "Se encontraron " + listaFunciones.size() + " funciones", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, String.format(getString(R.string.encontradas_funciones), listaFunciones.size()), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "No hay funciones guardadas", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.no_hay_funciones), Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             Toast.makeText(this, "Error al cargar funciones: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -139,24 +139,23 @@ public class ConsultarFunciones extends AppCompatActivity {
                     String nombre = cursor.getString(1);
                     String asiento = cursor.getString(2);
 
-
-                    if (cedula == null) cedula = "Sin cédula";
-                    if (nombre == null) nombre = "Sin nombre";
-                    if (asiento == null) asiento = "Sin asiento";
+                    if (cedula == null) cedula = getString(R.string.sin_cedula);
+                    if (nombre == null) nombre = getString(R.string.sin_nombre);
+                    if (asiento == null) asiento = getString(R.string.sin_asiento);
 
                     listaDetalles.add(cedula + " - " + nombre + " | Asiento: " + asiento);
                 } while (cursor.moveToNext());
 
                 adapterDetalles.notifyDataSetChanged();
-                Toast.makeText(this, "Clientes: " + listaDetalles.size(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, String.format(getString(R.string.clientes_count), listaDetalles.size()), Toast.LENGTH_SHORT).show();
             } else {
-                listaDetalles.add("No hay clientes registrados en esta función");
+                listaDetalles.add(getString(R.string.no_clientes_funcion));
                 adapterDetalles.notifyDataSetChanged();
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Error al cargar detalles: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, String.format(getString(R.string.error_cargar_detalles), e.getMessage()), Toast.LENGTH_LONG).show();
             e.printStackTrace();
-            listaDetalles.add("Error al cargar clientes");
+            listaDetalles.add(getString(R.string.error_cargar_clientes));
             adapterDetalles.notifyDataSetChanged();
         } finally {
             if (cursor != null) cursor.close();
@@ -168,7 +167,7 @@ public class ConsultarFunciones extends AppCompatActivity {
         String fechaBuscar = txtBuscarFecha.getText().toString().trim();
 
         if (fechaBuscar.isEmpty()) {
-            Toast.makeText(this, "Ingrese una fecha para buscar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.ingrese_fecha_buscar), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -202,9 +201,9 @@ public class ConsultarFunciones extends AppCompatActivity {
                 } while (cursor.moveToNext());
 
                 adapterFunciones.notifyDataSetChanged();
-                Toast.makeText(this, "Se encontraron " + listaFunciones.size() + " funciones", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, String.format(getString(R.string.encontradas_funciones), listaFunciones.size()), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "No se encontraron funciones con esa fecha", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.no_funciones_fecha), Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             Toast.makeText(this, "Error al buscar: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -225,28 +224,25 @@ public class ConsultarFunciones extends AppCompatActivity {
     }
 
     public void btnEliminarFuncion_Click(View view) {
-        if (idFuncionSeleccionada == -1) {
-            Toast.makeText(this, "Seleccione una función para eliminar", Toast.LENGTH_SHORT).show();
+        if (idFuncionSeleccionada == -1) {Toast.makeText(this, getString(R.string.seleccione_funcion_eliminar), Toast.LENGTH_SHORT).show();
             return;
         }
 
         new AlertDialog.Builder(this)
-                .setTitle("Eliminar Función")
-                .setMessage("¿Está seguro de eliminar esta función y todos sus detalles?")
-                .setPositiveButton("Sí", (dialog, which) -> {
+                .setTitle(getString(R.string.titulo_eliminar_funcion))
+                .setMessage(getString(R.string.mensaje_eliminar_funcion))
+                .setPositiveButton(getString(R.string.si), (dialog, which) -> {
                     SQLiteDatabase db = null;
                     try {
                         db = conn.getWritableDatabase();
 
-
                         db.delete("detalle_funcion", "idfuncion=?",
                                 new String[]{String.valueOf(idFuncionSeleccionada)});
-
 
                         db.delete("funcion", "id=?",
                                 new String[]{String.valueOf(idFuncionSeleccionada)});
 
-                        Toast.makeText(this, "Función eliminada correctamente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.funcion_eliminada_bd), Toast.LENGTH_SHORT).show();
 
                         listaDetalles.clear();
                         adapterDetalles.notifyDataSetChanged();
@@ -260,7 +256,7 @@ public class ConsultarFunciones extends AppCompatActivity {
                         if (db != null) db.close();
                     }
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton(getString(R.string.no), null)
                 .show();
     }
 

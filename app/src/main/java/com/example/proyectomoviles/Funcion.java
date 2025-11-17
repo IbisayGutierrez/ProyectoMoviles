@@ -36,7 +36,7 @@ public class Funcion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_funcion);
 
-        conn = new AdminDB(this, "Proyecto", null, 1);
+        conn = new AdminDB(this, "Proyecto", null, 2);
 
         txtCodigoPelicula = findViewById(R.id.txtCodigoPelicula);
         txtFecha = findViewById(R.id.txtFecha);
@@ -55,44 +55,53 @@ public class Funcion extends AppCompatActivity {
         listDetalleFuncion.setAdapter(adapter);
         listDetalleFuncion.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
-        listDetalleFuncion.setOnItemClickListener((parent, view, position, id) -> {
-            posicionSeleccionada = position;
-            ItemFuncion item = listaFunciones.get(position);
+        listDetalleFuncion.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                posicionSeleccionada = position;
+                ItemFuncion item = listaFunciones.get(position);
 
-            txtCodigoPelicula.setText(String.valueOf(item.codigoPelicula));
-            txtTituloPelicula.setText(item.tituloPelicula);
-            txtFecha.setText(item.fecha);
-            txtHora.setText(item.hora);
-            txtCedula.setText(item.cedula);
-            txtNombreCliente.setText(item.nombreCliente);
-            txtAsiento.setText(item.asiento);
+                txtCodigoPelicula.setText(String.valueOf(item.codigoPelicula));
+                txtTituloPelicula.setText(item.tituloPelicula);
+                txtFecha.setText(item.fecha);
+                txtHora.setText(item.hora);
+                txtCedula.setText(item.cedula);
+                txtNombreCliente.setText(item.nombreCliente);
+                txtAsiento.setText(item.asiento);
 
-            peliculaCodigo = item.codigoPelicula;
-            peliculaTitulo = item.tituloPelicula;
+                peliculaCodigo = item.codigoPelicula;
+                peliculaTitulo = item.tituloPelicula;
+            }
         });
     }
 
     public void seleccionarFecha(View view) {
         Calendar c = Calendar.getInstance();
-        new DatePickerDialog(this, (dp, y, m, d) ->
-                txtFecha.setText(d + "/" + (m + 1) + "/" + y),
-                c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH))
-                .show();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker dp, int y, int m, int d) {
+                txtFecha.setText(d + "/" + (m + 1) + "/" + y);
+            }
+        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
     }
 
     public void seleccionarHora(View view) {
         Calendar c = Calendar.getInstance();
-        new TimePickerDialog(this, (tp, h, m) ->
-                txtHora.setText(h + ":" + String.format("%02d", m)),
-                c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true)
-                .show();
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker tp, int h, int m) {
+                txtHora.setText(h + ":" + String.format("%02d", m));
+            }
+        }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true);
+        timePickerDialog.show();
     }
 
     public void btnBuscarPelicula_Click(View view) {
         String codigo = txtCodigoPelicula.getText().toString().trim();
 
         if (codigo.isEmpty()) {
-            Toast.makeText(this, "Ingrese un código de película", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.ingrese_codigo), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -104,12 +113,12 @@ public class Funcion extends AppCompatActivity {
             peliculaCodigo = cursor.getInt(0);
             peliculaTitulo = cursor.getString(1);
             txtTituloPelicula.setText(peliculaTitulo);
-            Toast.makeText(this, "Película encontrada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.pelicula_encontrada), Toast.LENGTH_SHORT).show();
         } else {
-            txtTituloPelicula.setText("Película no encontrada");
+            txtTituloPelicula.setText(getString(R.string.pelicula_no_encontrada));
             peliculaCodigo = -1;
             peliculaTitulo = "";
-            Toast.makeText(this, "No existe película con ese código", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.no_existe_pelicula), Toast.LENGTH_SHORT).show();
         }
 
         cursor.close();
@@ -120,7 +129,7 @@ public class Funcion extends AppCompatActivity {
         String cedula = txtCedula.getText().toString().trim();
 
         if (cedula.isEmpty()) {
-            Toast.makeText(this, "Ingrese una cédula", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.ingrese_cedula), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -131,8 +140,8 @@ public class Funcion extends AppCompatActivity {
         if (cursor.moveToFirst()) {
             txtNombreCliente.setText(cursor.getString(0));
         } else {
-            txtNombreCliente.setText("Cliente no existe");
-            Toast.makeText(this, "No existe cliente con esa cédula", Toast.LENGTH_SHORT).show();
+            txtNombreCliente.setText(getString(R.string.cliente_no_existe));
+            Toast.makeText(this, getString(R.string.no_existe_cliente), Toast.LENGTH_SHORT).show();
         }
 
         cursor.close();
@@ -140,37 +149,58 @@ public class Funcion extends AppCompatActivity {
     }
 
     public void btnAgregar_Click(View view) {
+        String codigoPelicula = txtCodigoPelicula.getText().toString().trim();
         String fecha = txtFecha.getText().toString().trim();
         String hora = txtHora.getText().toString().trim();
         String cedula = txtCedula.getText().toString().trim();
         String nombreCliente = txtNombreCliente.getText().toString().trim();
         String asiento = txtAsiento.getText().toString().trim();
 
+        if (codigoPelicula.isEmpty()) {
+            Toast.makeText(this, getString(R.string.ingrese_codigo), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (fecha.isEmpty() || hora.isEmpty()) {
-            Toast.makeText(this, "Seleccione fecha y hora", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.seleccione_fecha_hora), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (peliculaCodigo == -1 || peliculaTitulo.isEmpty()) {
-            Toast.makeText(this, "Primero busque una película válida", Toast.LENGTH_SHORT).show();
+        if (peliculaCodigo == -1 || peliculaTitulo.isEmpty() ||
+                peliculaTitulo.equals(getString(R.string.titulo_pelicula_placeholder)) ||
+                peliculaTitulo.equals(getString(R.string.pelicula_no_encontrada))) {
+            Toast.makeText(this, getString(R.string.busque_pelicula_valida), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (cedula.isEmpty() || nombreCliente.isEmpty() || nombreCliente.equals("Nombre cliente")
-                || nombreCliente.equals("Cliente no existe")) {
-            Toast.makeText(this, "Primero busque un cliente válido", Toast.LENGTH_SHORT).show();
+        if (cedula.isEmpty()) {
+            Toast.makeText(this, getString(R.string.ingrese_cedula), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (nombreCliente.isEmpty() || nombreCliente.equals(getString(R.string.nombre_cliente))
+                || nombreCliente.equals(getString(R.string.cliente_no_existe))) {
+            Toast.makeText(this, getString(R.string.busque_cliente_valido), Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (asiento.isEmpty()) {
-            Toast.makeText(this, "Ingrese el número de asiento", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.ingrese_asiento), Toast.LENGTH_SHORT).show();
             return;
+        }
+
+        for (ItemFuncion item : listaFunciones) {
+            if (item.cedula.equals(cedula) && item.fecha.equals(fecha)
+                    && item.hora.equals(hora) && item.codigoPelicula == peliculaCodigo) {
+                Toast.makeText(this, getString(R.string.cedula_repetida), Toast.LENGTH_LONG).show();
+                return;
+            }
         }
 
         for (ItemFuncion item : listaFunciones) {
             if (item.asiento.equalsIgnoreCase(asiento) && item.fecha.equals(fecha)
                     && item.hora.equals(hora) && item.codigoPelicula == peliculaCodigo) {
-                Toast.makeText(this, "Este asiento ya está ocupado para esta función", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.asiento_ocupado), Toast.LENGTH_SHORT).show();
                 return;
             }
         }
@@ -181,59 +211,85 @@ public class Funcion extends AppCompatActivity {
         listaParaMostrar.add(nuevaFuncion.toString());
         adapter.notifyDataSetChanged();
 
-        Toast.makeText(this, "Función agregada a la lista", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.funcion_agregada), Toast.LENGTH_SHORT).show();
 
         txtCedula.setText("");
-        txtNombreCliente.setText("Nombre cliente");
+        txtNombreCliente.setText(getString(R.string.nombre_cliente));
         txtAsiento.setText("");
     }
 
     public void btnEliminar_Click(View view) {
         if (posicionSeleccionada == -1) {
-            Toast.makeText(this, "Seleccione una función de la lista", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.seleccione_funcion), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        new AlertDialog.Builder(this)
-                .setTitle("Eliminar")
-                .setMessage("¿Desea eliminar esta función de la lista?")
-                .setPositiveButton("Sí", (dialog, which) -> {
-                    listaFunciones.remove(posicionSeleccionada);
-                    listaParaMostrar.remove(posicionSeleccionada);
-                    adapter.notifyDataSetChanged();
-                    posicionSeleccionada = -1;
-                    limpiarCampos();
-                    Toast.makeText(this, "Función eliminada de la lista", Toast.LENGTH_SHORT).show();
-                })
-                .setNegativeButton("No", null)
-                .show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.titulo_eliminar));
+        builder.setMessage(getString(R.string.mensaje_eliminar));
+        builder.setPositiveButton(getString(R.string.si), new AlertDialog.OnClickListener() {
+            @Override
+            public void onClick(android.content.DialogInterface dialog, int which) {
+                listaFunciones.remove(posicionSeleccionada);
+                listaParaMostrar.remove(posicionSeleccionada);
+                adapter.notifyDataSetChanged();
+                posicionSeleccionada = -1;
+                limpiarCampos();
+                Toast.makeText(Funcion.this, getString(R.string.funcion_eliminada), Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.no), null);
+        builder.show();
     }
 
     public void btnEditar_Click(View view) {
         if (posicionSeleccionada == -1) {
-            Toast.makeText(this, "Seleccione una función de la lista para editar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.seleccione_para_editar), Toast.LENGTH_SHORT).show();
             return;
         }
 
+        String codigoPelicula = txtCodigoPelicula.getText().toString().trim();
         String fecha = txtFecha.getText().toString().trim();
         String hora = txtHora.getText().toString().trim();
         String cedula = txtCedula.getText().toString().trim();
         String nombreCliente = txtNombreCliente.getText().toString().trim();
         String asiento = txtAsiento.getText().toString().trim();
 
+        if (codigoPelicula.isEmpty()) {
+            Toast.makeText(this, getString(R.string.ingrese_codigo), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (fecha.isEmpty() || hora.isEmpty() || asiento.isEmpty()) {
-            Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.complete_campos), Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (peliculaCodigo == -1) {
-            Toast.makeText(this, "Busque una película válida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.busque_pelicula_valida), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (cedula.isEmpty() || nombreCliente.equals("Cliente no existe")) {
-            Toast.makeText(this, "Busque un cliente válido", Toast.LENGTH_SHORT).show();
+        if (cedula.isEmpty()) {
+            Toast.makeText(this, getString(R.string.ingrese_cedula), Toast.LENGTH_SHORT).show();
             return;
+        }
+
+        if (nombreCliente.equals(getString(R.string.cliente_no_existe))
+                || nombreCliente.equals(getString(R.string.nombre_cliente))) {
+            Toast.makeText(this, getString(R.string.busque_cliente_valido), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        for (int i = 0; i < listaFunciones.size(); i++) {
+            if (i != posicionSeleccionada) {
+                ItemFuncion item = listaFunciones.get(i);
+                if (item.cedula.equals(cedula) && item.fecha.equals(fecha)
+                        && item.hora.equals(hora) && item.codigoPelicula == peliculaCodigo) {
+                    Toast.makeText(this, getString(R.string.cedula_repetida), Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
         }
 
         for (int i = 0; i < listaFunciones.size(); i++) {
@@ -241,7 +297,7 @@ public class Funcion extends AppCompatActivity {
                 ItemFuncion item = listaFunciones.get(i);
                 if (item.asiento.equalsIgnoreCase(asiento) && item.fecha.equals(fecha)
                         && item.hora.equals(hora) && item.codigoPelicula == peliculaCodigo) {
-                    Toast.makeText(this, "Este asiento ya está ocupado para esta función", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.asiento_ocupado), Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
@@ -253,37 +309,40 @@ public class Funcion extends AppCompatActivity {
         listaParaMostrar.set(posicionSeleccionada, funcionActualizada.toString());
         adapter.notifyDataSetChanged();
 
-        Toast.makeText(this, "Función actualizada", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.funcion_actualizada), Toast.LENGTH_SHORT).show();
         posicionSeleccionada = -1;
         limpiarCampos();
     }
 
     public void btnGuardarFuncion_Click(View view) {
         if (listaFunciones.isEmpty()) {
-            Toast.makeText(this, "Agregue al menos una función antes de guardar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.agregar_una_funcion), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        new AlertDialog.Builder(this)
-                .setTitle("Guardar Funciones")
-                .setMessage("¿Desea guardar " + listaFunciones.size() + " función(es) en la base de datos?")
-                .setPositiveButton("Sí", (dialog, which) -> {
-                    int funcionesGuardadas = 0;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.titulo_guardar));
+        builder.setMessage(String.format(getString(R.string.mensaje_guardar), listaFunciones.size()));
+        builder.setPositiveButton(getString(R.string.si), new AlertDialog.OnClickListener() {
+            @Override
+            public void onClick(android.content.DialogInterface dialog, int which) {
+                int funcionesGuardadas = 0;
 
-                    for (ItemFuncion item : listaFunciones) {
-                        long idFuncion = conn.insertarFuncion(item.fecha, item.hora, item.codigoPelicula);
+                for (ItemFuncion item : listaFunciones) {
+                    long idFuncion = conn.insertarFuncion(item.fecha, item.hora, item.codigoPelicula);
 
-                        if (idFuncion != -1) {
-                            conn.insertarDetalle((int) idFuncion, item.cedula, item.asiento);
-                            funcionesGuardadas++;
-                        }
+                    if (idFuncion != -1) {
+                        conn.insertarDetalle((int) idFuncion, item.cedula, item.asiento);
+                        funcionesGuardadas++;
                     }
+                }
 
-                    Toast.makeText(this, "✅ " + funcionesGuardadas + " función(es) guardada(s)", Toast.LENGTH_LONG).show();
-                    limpiarTodo();
-                })
-                .setNegativeButton("No", null)
-                .show();
+                Toast.makeText(Funcion.this, String.format(getString(R.string.funciones_guardadas_msg), funcionesGuardadas), Toast.LENGTH_LONG).show();
+                limpiarTodo();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.no), null);
+        builder.show();
     }
 
     public void btnConsultar_Click(View view) {
@@ -292,12 +351,17 @@ public class Funcion extends AppCompatActivity {
     }
 
     public void btnLimpiar_Click(View view) {
-        new AlertDialog.Builder(this)
-                .setTitle("Limpiar")
-                .setMessage("¿Desea limpiar todos los campos y la lista?")
-                .setPositiveButton("Sí", (dialog, which) -> limpiarTodo())
-                .setNegativeButton("No", null)
-                .show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.titulo_limpiar));
+        builder.setMessage(getString(R.string.mensaje_limpiar));
+        builder.setPositiveButton(getString(R.string.si), new AlertDialog.OnClickListener() {
+            @Override
+            public void onClick(android.content.DialogInterface dialog, int which) {
+                limpiarTodo();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.no), null);
+        builder.show();
     }
 
     private void limpiarTodo() {
@@ -316,18 +380,23 @@ public class Funcion extends AppCompatActivity {
         txtHora.setText("");
         txtCedula.setText("");
         txtAsiento.setText("");
-        txtTituloPelicula.setText("Título película");
-        txtNombreCliente.setText("Nombre cliente");
+        txtTituloPelicula.setText(getString(R.string.titulo_pelicula_placeholder));
+        txtNombreCliente.setText(getString(R.string.nombre_cliente));
     }
 
     public void btnSalir_Click(View view) {
         if (!listaFunciones.isEmpty()) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Salir")
-                    .setMessage("Hay funciones sin guardar. ¿Desea salir de todos modos?")
-                    .setPositiveButton("Sí", (dialog, which) -> finish())
-                    .setNegativeButton("No", null)
-                    .show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.titulo_salir));
+            builder.setMessage(getString(R.string.mensaje_salir));
+            builder.setPositiveButton(getString(R.string.si), new AlertDialog.OnClickListener() {
+                @Override
+                public void onClick(android.content.DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            builder.setNegativeButton(getString(R.string.no), null);
+            builder.show();
         } else {
             finish();
         }

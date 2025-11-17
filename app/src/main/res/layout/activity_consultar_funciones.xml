@@ -5,22 +5,22 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-
+    <!-- Título -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Funciones Guardadas"
+        android:text="@string/funciones_guardadas"
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
         android:paddingBottom="16dp" />
 
-
+    <!-- Buscador -->
     <EditText
         android:id="@+id/txtBuscarFecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Buscar por fecha (dd/mm/yyyy)" />
+        android:hint="@string/buscar_fecha_hint" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Buscar" />
+            android:text="@string/btn_buscar" />
 
         <Button
             android:id="@+id/btnMostrarTodas"
@@ -41,14 +41,14 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Mostrar Todas" />
+            android:text="@string/btn_mostrar_todas" />
     </LinearLayout>
 
-
+    <!-- Lista de funciones -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Funciones:"
+        android:text="@string/funciones_label"
         android:textStyle="bold"
         android:paddingTop="16dp"
         android:paddingBottom="8dp" />
@@ -59,11 +59,11 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-
+    <!-- Lista de clientes -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Clientes de la función:"
+        android:text="@string/clientes_funcion"
         android:textStyle="bold"
         android:paddingTop="16dp"
         android:paddingBottom="8dp" />
@@ -73,7 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp" />
 
-
+    <!-- Botones -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Eliminar" />
+            android:text="@string/btn_eliminar" />
 
         <Button
             android:id="@+id/btnVolver"
@@ -94,7 +94,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Volver" />
+            android:text="@string/btn_volver" />
     </LinearLayout>
 
 </LinearLayout>

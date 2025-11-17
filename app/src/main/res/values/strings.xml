@@ -29,4 +29,88 @@
     <string name="guardar">Guardar</string>
 
 
+
+    <string name="titulo_pelicula">PELÍCULA</string>
+    <string name="codigo_pelicula">Código película</string>
+    <string name="buscar_pelicula">Buscar Película</string>
+    <string name="titulo_pelicula_placeholder">Título película</string>
+
+    <string name="fecha_hora">FECHA Y HORA</string>
+    <string name="fecha">Fecha</string>
+    <string name="seleccionar_fecha">Seleccionar Fecha</string>
+    <string name="hora">Hora</string>
+    <string name="seleccionar_hora">Seleccionar Hora</string>
+
+    <string name="buscar_cliente">Buscar Cliente</string>
+    <string name="nombre_cliente">Nombre cliente</string>
+
+    <string name="asiento">Número de asiento (ej: A1, B5, C10)</string>
+
+    <string name="btn_agregar">Agregar</string>
+    <string name="btn_editar">Editar</string>
+    <string name="btn_eliminar">Eliminar</string>
+    <string name="funciones_agregadas">Funciones agregadas:</string>
+    <string name="btn_guardar_funciones">GUARDAR FUNCIONES EN BD</string>
+    <string name="btn_ver_funciones">VER FUNCIONES GUARDADAS</string>
+    <string name="btn_limpiar">LIMPIAR</string>
+    <string name="btn_salir">SALIR</string>
+
+    <string name="funciones_guardadas">Funciones Guardadas</string>
+    <string name="buscar_fecha_hint">Buscar por fecha (dd/mm/yyyy)</string>
+    <string name="btn_buscar">Buscar</string>
+    <string name="btn_mostrar_todas">Mostrar Todas</string>
+    <string name="funciones_label">Funciones:</string>
+    <string name="clientes_funcion">Clientes de la función:</string>
+    <string name="btn_volver">Volver</string>
+
+    <string name="ingrese_codigo">Ingrese un código de película</string>
+    <string name="pelicula_encontrada">Película encontrada</string>
+    <string name="pelicula_no_encontrada">Película no encontrada</string>
+    <string name="no_existe_pelicula">No existe película con ese código</string>
+    <string name="ingrese_cedula">Ingrese una cédula</string>
+    <string name="cliente_no_existe">Cliente no existe</string>
+    <string name="no_existe_cliente">No existe cliente con esa cédula</string>
+    <string name="seleccione_fecha_hora">Seleccione fecha y hora</string>
+    <string name="busque_pelicula_valida">Primero busque una película válida</string>
+    <string name="busque_cliente_valido">Primero busque un cliente válido</string>
+    <string name="ingrese_asiento">Ingrese el número de asiento</string>
+    <string name="asiento_ocupado">Este asiento ya está ocupado para esta función</string>
+    <string name="cedula_repetida">Este cliente ya tiene un asiento reservado para esta función</string>
+    <string name="funcion_agregada">Función agregada a la lista</string>
+    <string name="seleccione_funcion">Seleccione una función de la lista</string>
+    <string name="titulo_eliminar">Eliminar</string>
+    <string name="mensaje_eliminar">¿Desea eliminar esta función de la lista?</string>
+    <string name="si">Sí</string>
+    <string name="no">No</string>
+    <string name="funcion_eliminada">Función eliminada de la lista</string>
+    <string name="seleccione_para_editar">Seleccione una función de la lista para editar</string>
+    <string name="complete_campos">Complete todos los campos</string>
+    <string name="funcion_actualizada">Función actualizada</string>
+    <string name="agregar_una_funcion">Agregue al menos una función antes de guardar</string>
+    <string name="titulo_guardar">Guardar Funciones</string>
+    <string name="mensaje_guardar">¿Desea guardar %d función(es) en la base de datos?</string>
+    <string name="funciones_guardadas_msg">✅ %d función(es) guardada(s)</string>
+    <string name="titulo_limpiar">Limpiar</string>
+    <string name="mensaje_limpiar">¿Desea limpiar todos los campos y la lista?</string>
+    <string name="titulo_salir">Salir</string>
+    <string name="mensaje_salir">Hay funciones sin guardar. ¿Desea salir de todos modos?</string>
+
+    <string name="ingrese_fecha_buscar">Ingrese una fecha para buscar</string>
+    <string name="encontradas_funciones">Se encontraron %d funciones</string>
+    <string name="no_hay_funciones">No hay funciones guardadas</string>
+    <string name="no_funciones_fecha">No se encontraron funciones con esa fecha</string>
+    <string name="seleccione_funcion_eliminar">Seleccione una función para eliminar</string>
+    <string name="titulo_eliminar_funcion">Eliminar Función</string>
+    <string name="mensaje_eliminar_funcion">¿Está seguro de eliminar esta función y todos sus detalles?</string>
+    <string name="funcion_eliminada_bd">Función eliminada</string>
+    <string name="no_clientes_registrados">No hay clientes registrados</string>
+    <string name="sin_cedula">Sin cédula</string>
+    <string name="sin_nombre">Sin nombre</string>
+    <string name="sin_asiento">Sin asiento</string>
+    <string name="error_cargar_detalles">Error al cargar detalles: %s</string>
+    <string name="error_cargar_clientes">Error al cargar clientes</string>
+    <string name="clientes_count">Clientes: %d</string>
+    <string name="no_clientes_funcion">No hay clientes registrados en esta función</string>
+    <string name="formato_funcion">ID: %1$d | %2$s - %3$s\n%4$s</string>
+    <string name="formato_detalle">%1$s - %2$s | Asiento: %3$s</string>
 </resources>
