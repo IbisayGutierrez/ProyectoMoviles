@@ -57,16 +57,16 @@ public class CrearPelicula extends AppCompatActivity {
         duracion = Integer.parseInt(txtDuracion.getText().toString());
         genero = txtGenero.getText().toString();
         if (modoEdicion) {
-            Actualizar();
-            finish();
-            return;
-        }else if (codigo > 0||!titulo.isEmpty()||duracion > 0||!genero.isEmpty()) {
-            Registrar(codigo,titulo,duracion,genero);
+            boolean actualizo = Actualizar();
+            if (actualizo) {
+                finish();
+            }
+        } else if (codigo > 0 && !titulo.isEmpty() && duracion > 0 && !genero.isEmpty()) {
+            Registrar(codigo, titulo, duracion, genero);
             txtCodigo.setText("");
             txtTitulo.setText("");
             txtDuracion.setText("");
             txtGenero.setText("");
-
         } else {
             Toast.makeText(getApplicationContext(), "Por favor inserte todos los datos", Toast.LENGTH_LONG).show();
         }
@@ -93,17 +93,18 @@ public class CrearPelicula extends AppCompatActivity {
         BaseDatos.close();
     }
 
-    public void Actualizar() {
+    public boolean Actualizar() {
 
         String nuevoTitulo = txtTitulo.getText().toString().trim();
         String nuevaDuracionTxt = txtDuracion.getText().toString().trim();
         String nuevoGenero = txtGenero.getText().toString().trim();
-        int nuevaDuracion = Integer.parseInt(nuevaDuracionTxt);
+
 
         if (nuevoTitulo.isEmpty() || nuevaDuracionTxt.isEmpty() || nuevoGenero.isEmpty()) {
             Toast.makeText(this, "Debe completar todos los campos", Toast.LENGTH_LONG).show();
-            return;
+            return false;
         }
+        int nuevaDuracion = Integer.parseInt(nuevaDuracionTxt);
 
         AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
         SQLiteDatabase BaseDatos = admin.getWritableDatabase();
@@ -114,13 +115,15 @@ public class CrearPelicula extends AppCompatActivity {
         registro.put("genero", nuevoGenero);
 
         int filas = BaseDatos.update("pelicula", registro, "codigo=?", new String[]{String.valueOf(codigoOriginal)});
-
+        BaseDatos.close();
         if (filas > 0) {
             Toast.makeText(this, "Película actualizada correctamente", Toast.LENGTH_LONG).show();
+            return true;
         } else {
             Toast.makeText(this, "No se pudo actualizar la película", Toast.LENGTH_LONG).show();
+            return false;
         }
-        BaseDatos.close();
+
     }
 
     public void Regresar(View view) {
