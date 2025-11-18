@@ -100,6 +100,11 @@ public class CrearPelicula extends AppCompatActivity {
         String nuevoGenero = txtGenero.getText().toString().trim();
         int nuevaDuracion = Integer.parseInt(nuevaDuracionTxt);
 
+        if (nuevoTitulo.isEmpty() || nuevaDuracionTxt.isEmpty() || nuevoGenero.isEmpty()) {
+            Toast.makeText(this, "Debe completar todos los campos", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
         SQLiteDatabase BaseDatos = admin.getWritableDatabase();
 
