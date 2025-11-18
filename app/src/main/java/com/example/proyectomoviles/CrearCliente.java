@@ -108,18 +108,25 @@ public class CrearCliente extends AppCompatActivity {
         BaseDeDatos.close();
     }
 
-    public void Actualizar() {
-        AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
-        SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
+    public boolean Actualizar() {
+
 
         String nuevoNombre = txtNombre.getText().toString().trim();
         String nuevoTelefono = txtTelefono.getText().toString().trim();
         String nuevoCorreo   = txtCorreo.getText().toString().trim();
         String nuevaContra   = txtContra.getText().toString().trim();
 
+        if (nuevoNombre.isEmpty() || nuevoTelefono.isEmpty() || nuevoCorreo.isEmpty()) {
+            Toast.makeText(this, "Debe completar todos los campos", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+
+
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
+        SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
+
         ContentValues registro = new ContentValues();
-
-
         registro.put("nombre", nuevoNombre);
         registro.put("telefono", nuevoTelefono);
         registro.put("correo", nuevoCorreo);
@@ -130,14 +137,16 @@ public class CrearCliente extends AppCompatActivity {
         }
 
         int filas = BaseDeDatos.update("cliente", registro, "cedula=?", new String[]{cedulaOriginal});
-
+        BaseDeDatos.close();
         if (filas > 0) {
-            Toast.makeText(this, getString(R.string.toast_actualizacionexitosa), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Cliente actualizado correctamente", Toast.LENGTH_LONG).show();
+            return true;
         } else {
-            Toast.makeText(this, getString(R.string.toast_noactualizacion), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No se pudo actualizar el cliente", Toast.LENGTH_LONG).show();
+            return false;
         }
 
-        BaseDeDatos.close();
+
     }
     public void Regresar(View view) {
         finish();
