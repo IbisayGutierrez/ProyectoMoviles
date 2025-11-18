@@ -113,4 +113,26 @@
     <string name="no_clientes_funcion">No hay clientes registrados en esta función</string>
     <string name="formato_funcion">ID: %1$d | %2$s - %3$s\n%4$s</string>
     <string name="formato_detalle">%1$s - %2$s | Asiento: %3$s</string>
+
+    <string name="toast_noclientes">No hay clientes registrados</string>
+    <string name="toast_seleccionedatos">Por favor seleccione un dato</string>
+    <string name="toast_seelimino">Registros eliminados correctamente</string>
+    <string name="toast_noregistro">No se encontró ningún registro</string>
+    <string name="toast_registoencontrado">Registros encontrados</string>
+    <string name="toast_errorseleccionar">Error al seleccionar</string>
+    <string name="toast_errorcargar">Error al cargar</string>
+    <string name="toast_insertartodo">Por favor inserte todos los datos</string>
+    <string name="toast_existecedula">Ya existe un cliente con esa cedula</string>
+    <string name="toast_registroexitoso">Se ha realizado un registro exitoso</string>
+    <string name="toast_actualizacionexitosa">Se ha actualizado correctamente</string>
+    <string name="toast_noactualizacion">No se ha actualizado</string>
+    <string name="toast_existecodigo">Ya existe una película con ese código</string>
+    <string name="toast_sesionexitoso">Inicio de sesión exitoso</string>
+    <string name="toast_sesionincorrecta">Cédula o contraseña incorrecta</string>
+
+
+
+
+
+
 </resources>

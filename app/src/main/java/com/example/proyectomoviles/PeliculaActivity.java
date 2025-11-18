@@ -87,7 +87,7 @@ public class PeliculaActivity extends AppCompatActivity {
                 datos.add(p);
             } while (fila.moveToNext());
         } else {
-            Toast.makeText(this, "No hay películas registradas", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_noregistro), Toast.LENGTH_LONG).show();
         }
         fila.close();
         bd.close();
@@ -109,7 +109,7 @@ public class PeliculaActivity extends AppCompatActivity {
             }
             itemseleccionado = -1;
         } else {
-            Toast.makeText(getApplicationContext(), "Debe seleccionar un item", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_seleccionedatos), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -122,10 +122,10 @@ public class PeliculaActivity extends AppCompatActivity {
             BaseDatos.close();
 
             if (registrosEliminados > 0) {
-                Toast.makeText(getApplicationContext(), "Registros eliminados correctamente", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.toast_seelimino), Toast.LENGTH_LONG).show();
             }
         } else {
-            Toast.makeText(getApplicationContext(), "Falta el nombre para eliminar", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_seleccionedatos), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -174,9 +174,9 @@ public class PeliculaActivity extends AppCompatActivity {
                 Pelicula p = new Pelicula(codigo, titulo, duracion, genero);
                 adapter.add(p);
             } while (fila.moveToNext());
-            Toast.makeText(getApplicationContext(), "Registros encontrados", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_registoencontrado), Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getApplicationContext(), "No se encontraron registros", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_noregistro), Toast.LENGTH_LONG).show();
         }
 
         fila.close();
@@ -196,7 +196,7 @@ public class PeliculaActivity extends AppCompatActivity {
 
             startActivity(intent);
         } else {
-            Toast.makeText(this, "Por favor seleccione una película para editar", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_seleccionedatos), Toast.LENGTH_LONG).show();
         }
     }
     protected void onResume() {

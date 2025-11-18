@@ -81,7 +81,7 @@ public class CrearCliente extends AppCompatActivity {
                 txtTelefono.setText("");
                 txtCorreo.setText("");
             } else {
-                Toast.makeText(getApplicationContext(), "Por favor inserte todos los datos", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.toast_insertartodo), Toast.LENGTH_LONG).show();
             }
         }
 
@@ -93,7 +93,7 @@ public class CrearCliente extends AppCompatActivity {
         SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
         Cursor fila = BaseDeDatos.rawQuery("select cedula from cliente where cedula='"+cedula+"'", null);
         if (fila.moveToFirst()){
-            Toast.makeText(getApplicationContext(),"Ya existe un cliente con esa cedula", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_existecedula), Toast.LENGTH_LONG).show();
         }else {
             ContentValues registro = new ContentValues();
             registro.put("cedula", cedula);
@@ -102,7 +102,7 @@ public class CrearCliente extends AppCompatActivity {
             registro.put("telefono", telefono);
             registro.put("correo", correo);
             BaseDeDatos.insert("cliente", null, registro);
-            Toast.makeText(this, "Se ha registrado el cliente con exito", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_existecedula), Toast.LENGTH_LONG).show();
         }
         fila.close();
         BaseDeDatos.close();
@@ -132,9 +132,9 @@ public class CrearCliente extends AppCompatActivity {
         int filas = BaseDeDatos.update("cliente", registro, "cedula=?", new String[]{cedulaOriginal});
 
         if (filas > 0) {
-            Toast.makeText(this, "Cliente actualizado correctamente", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_actualizacionexitosa), Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "No se pudo actualizar el cliente", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_noactualizacion), Toast.LENGTH_LONG).show();
         }
 
         BaseDeDatos.close();

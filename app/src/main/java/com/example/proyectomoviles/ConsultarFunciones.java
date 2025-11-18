@@ -70,7 +70,7 @@ public class ConsultarFunciones extends AppCompatActivity {
                 idFuncionSeleccionada = funcion.id;
                 cargarDetallesFuncion(funcion.id);
             } catch (Exception e) {
-                Toast.makeText(this, "Error al seleccionar: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.toast_errorseleccionar), Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
         });
@@ -110,7 +110,7 @@ public class ConsultarFunciones extends AppCompatActivity {
                 Toast.makeText(this, getString(R.string.no_hay_funciones), Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Error al cargar funciones: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_errorcargar), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         } finally {
             if (cursor != null) cursor.close();

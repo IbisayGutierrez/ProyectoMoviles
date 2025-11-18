@@ -68,7 +68,7 @@ public class CrearPelicula extends AppCompatActivity {
             txtDuracion.setText("");
             txtGenero.setText("");
         } else {
-            Toast.makeText(getApplicationContext(), "Por favor inserte todos los datos", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_insertartodo), Toast.LENGTH_LONG).show();
         }
 
     }
@@ -79,7 +79,7 @@ public class CrearPelicula extends AppCompatActivity {
         SQLiteDatabase BaseDatos = admin.getWritableDatabase();
         Cursor fila = BaseDatos.rawQuery("SELECT codigo FROM pelicula WHERE codigo = " + codigo, null);
         if (fila.moveToFirst()) {
-            Toast.makeText(getApplicationContext(), "Ya existe una película con ese código", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_existecodigo), Toast.LENGTH_LONG).show();
         } else {
             ContentValues registro = new ContentValues();
             registro.put("codigo", codigo);
@@ -87,7 +87,7 @@ public class CrearPelicula extends AppCompatActivity {
             registro.put("duracion", duracion);
             registro.put("genero", genero);
             BaseDatos.insert("pelicula", null, registro);
-            Toast.makeText(getApplicationContext(), "La película se insertó correctamente", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_registroexitoso), Toast.LENGTH_LONG).show();
         }
         fila.close();
         BaseDatos.close();
@@ -101,7 +101,7 @@ public class CrearPelicula extends AppCompatActivity {
 
 
         if (nuevoTitulo.isEmpty() || nuevaDuracionTxt.isEmpty() || nuevoGenero.isEmpty()) {
-            Toast.makeText(this, "Debe completar todos los campos", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_insertartodo), Toast.LENGTH_LONG).show();
             return false;
         }
         int nuevaDuracion = Integer.parseInt(nuevaDuracionTxt);
@@ -117,10 +117,10 @@ public class CrearPelicula extends AppCompatActivity {
         int filas = BaseDatos.update("pelicula", registro, "codigo=?", new String[]{String.valueOf(codigoOriginal)});
         BaseDatos.close();
         if (filas > 0) {
-            Toast.makeText(this, "Película actualizada correctamente", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_actualizacionexitosa), Toast.LENGTH_LONG).show();
             return true;
         } else {
-            Toast.makeText(this, "No se pudo actualizar la película", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_noactualizacion), Toast.LENGTH_LONG).show();
             return false;
         }
 

@@ -98,7 +98,7 @@ public class ClienteActivity extends AppCompatActivity {
                 datos.add(c);
             } while (fila.moveToNext());
         }else {
-            Toast.makeText(this, "No hay clientes registrados", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_noclientes), Toast.LENGTH_LONG).show();
         }
         fila.close();
         bd.close();
@@ -119,7 +119,7 @@ public class ClienteActivity extends AppCompatActivity {
             }
             itemseleccionado = -1;
         } else {
-            Toast.makeText(this, "Por favor seleccione un cliente para eliminar", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_seleccionedatos), Toast.LENGTH_LONG).show();
         }
 
     }
@@ -133,12 +133,12 @@ public class ClienteActivity extends AppCompatActivity {
             BaseDatos.close();
 
             if (registrosEliminados > 0) {
-                Toast.makeText(getApplicationContext(), "Registros eliminados correctamente", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.toast_seelimino), Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(getApplicationContext(), "No se encontró ningún registro con esa cedula", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.toast_noregistro), Toast.LENGTH_LONG).show();
             }
         } else {
-            Toast.makeText(getApplicationContext(), "Falta la cedula para eliminar", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_seleccionedatos), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -186,9 +186,9 @@ public class ClienteActivity extends AppCompatActivity {
                 Cliente c = new Cliente(cedula, nombre, telefono, correo);
                 adapter.add(c);
             } while (fila.moveToNext());
-            Toast.makeText(getApplicationContext(), "Registros encontrados", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_registoencontrado), Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getApplicationContext(), "No se encontraron registros", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_noregistro), Toast.LENGTH_LONG).show();
         }
 
         fila.close();
@@ -208,7 +208,7 @@ public class ClienteActivity extends AppCompatActivity {
             intent.putExtra("modoEdicion", true);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "Por favor seleccione un cliente para editar", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_seleccionedatos), Toast.LENGTH_LONG).show();
         }
     }
 

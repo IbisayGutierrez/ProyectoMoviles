@@ -44,7 +44,7 @@ public class InicioSesionActivity extends AppCompatActivity {
         String contrasena = txtContraIS.getText().toString().trim();
 
         if (cedula.isEmpty() || contrasena.isEmpty()) {
-            Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_insertartodo), Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -57,11 +57,11 @@ public class InicioSesionActivity extends AppCompatActivity {
         );
 
         if (cursor.moveToFirst()) {
-            Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_sesionexitoso), Toast.LENGTH_LONG).show();
             startActivity(new Intent(this, MainActivity.class));
             finish();
         } else {
-            Toast.makeText(this, "Cédula o contraseña incorrecta", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_sesionincorrecta), Toast.LENGTH_LONG).show();
         }
 
         cursor.close();

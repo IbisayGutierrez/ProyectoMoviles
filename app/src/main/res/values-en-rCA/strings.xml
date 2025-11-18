@@ -115,5 +115,20 @@
     <string name="formato_funcion">ID: %1$d | %2$s - %3$s\n%4$s</string>
     <string name="formato_detalle">%1$s - %2$s | Seat: %3$s</string>
 
+    <string name="toast_noclientes">No customers registered</string>
+    <string name="toast_seleccionedatos">Please select a client</string>
+    <string name="toast_seelimino">Records successfully deleted</string>
+    <string name="toast_noregistro">No record was found with that ID number</string>
+    <string name="toast_registoencontrado">Records found</string>
+    <string name="toast_errorseleccionar">Error selecting</string>
+    <string name="toast_errorcargar">Error loading</string>
+    <string name="toast_insertartodo">Please insert all data</string>
+    <string name="toast_existecedula">There is already a client with that ID number</string>
+    <string name="toast_registroexitoso">The client has successfully registered</string>
+    <string name="toast_actualizacionexitosa">Successfully updated</string>
+    <string name="toast_noactualizacion">It has not been updated</string>
+    <string name="toast_existecodigo">There is already a movie with that code</string>
+    <string name="toast_sesionexitoso">Successful login</string>
+    <string name="toast_sesionincorrecta">Incorrect ID or password</string>
 
 </resources>
