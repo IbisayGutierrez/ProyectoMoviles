@@ -9,19 +9,20 @@
 
     <ListView
         android:id="@+id/ListViewMenu"
-        android:layout_width="349dp"
-        android:layout_height="592dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="386dp"
+        android:layout_height="542dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.373"
+        app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnBuscar"
-        android:layout_width="38dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="44dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
         android:foreground="@drawable/search"
         android:onClick="Buscar"
@@ -29,10 +30,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="225dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="256dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ListViewMenu">
@@ -92,10 +93,10 @@
 
     <EditText
         android:id="@+id/txtBuscar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="218dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
         android:ems="10"
         android:hint="@string/buscar"
