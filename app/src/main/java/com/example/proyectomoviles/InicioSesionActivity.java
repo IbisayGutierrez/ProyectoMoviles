@@ -41,9 +41,9 @@ public class InicioSesionActivity extends AppCompatActivity {
 
     private void validarLogin() {
         String cedula = txtCedulaIS.getText().toString().trim();
-        String contraseña = txtContraIS.getText().toString().trim();
+        String contrasena = txtContraIS.getText().toString().trim();
 
-        if (cedula.isEmpty() || contraseña.isEmpty()) {
+        if (cedula.isEmpty() || contrasena.isEmpty()) {
             Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -52,8 +52,8 @@ public class InicioSesionActivity extends AppCompatActivity {
         SQLiteDatabase db = admin.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(
-                "SELECT * FROM cliente WHERE cedula = ? AND contraseña = ?",
-                new String[]{cedula, contraseña}
+                "SELECT * FROM cliente WHERE cedula = ? AND contrasena = ?",
+                new String[]{cedula, contrasena}
         );
 
         if (cursor.moveToFirst()) {

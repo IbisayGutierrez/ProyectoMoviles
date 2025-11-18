@@ -98,7 +98,7 @@ public class CrearCliente extends AppCompatActivity {
             ContentValues registro = new ContentValues();
             registro.put("cedula", cedula);
             registro.put("nombre", nombre);
-            registro.put("contraseña", contra);
+            registro.put("contrasena", contra);
             registro.put("telefono", telefono);
             registro.put("correo", correo);
             BaseDeDatos.insert("cliente", null, registro);
@@ -109,7 +109,7 @@ public class CrearCliente extends AppCompatActivity {
     }
 
     public void Actualizar() {
-        AdminDB admin = new AdminDB(this, "Proyecto", null, 1);
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
         SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
 
         String nuevoNombre = txtNombre.getText().toString().trim();
@@ -126,7 +126,7 @@ public class CrearCliente extends AppCompatActivity {
 
         
         if (!nuevaContra.isEmpty()) {
-            registro.put("contraseña", nuevaContra);
+            registro.put("contrasena", nuevaContra);
         }
 
         int filas = BaseDeDatos.update("cliente", registro, "cedula=?", new String[]{cedulaOriginal});
