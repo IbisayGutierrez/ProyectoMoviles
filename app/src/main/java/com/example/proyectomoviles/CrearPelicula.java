@@ -50,18 +50,26 @@ public class CrearPelicula extends AppCompatActivity {
     }
 
     public void Insertar(View view) {
-        String titulo, genero;
-        int codigo,duracion;
-        codigo = Integer.parseInt(txtCodigo.getText().toString());
-        titulo = txtTitulo.getText().toString();
-        duracion = Integer.parseInt(txtDuracion.getText().toString());
-        genero = txtGenero.getText().toString();
+
+        String codigoStr = txtCodigo.getText().toString().trim();
+        String titulo = txtTitulo.getText().toString().trim();
+        String duracionStr = txtDuracion.getText().toString().trim();
+        String genero = txtGenero.getText().toString().trim();
+
+        if (codigoStr.isEmpty() || titulo.isEmpty() || duracionStr.isEmpty() || genero.isEmpty()) {
+            Toast.makeText(this, getString(R.string.toast_insertartodo), Toast.LENGTH_LONG).show();
+            return;
+        }
+        int codigo = Integer.parseInt(codigoStr);
+        int duracion = Integer.parseInt(duracionStr);
         if (modoEdicion) {
             boolean actualizo = Actualizar();
             if (actualizo) {
                 finish();
             }
-        } else if (codigo > 0 && !titulo.isEmpty() && duracion > 0 && !genero.isEmpty()) {
+            return;
+        }
+        if (codigo > 0 && duracion > 0) {
             Registrar(codigo, titulo, duracion, genero);
             txtCodigo.setText("");
             txtTitulo.setText("");
@@ -70,7 +78,6 @@ public class CrearPelicula extends AppCompatActivity {
         } else {
             Toast.makeText(this, getString(R.string.toast_insertartodo), Toast.LENGTH_LONG).show();
         }
-
     }
 
     public void Registrar(int codigo, String titulo, int duracion, String genero)
