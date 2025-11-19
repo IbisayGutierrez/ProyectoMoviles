@@ -102,7 +102,7 @@ public class CrearCliente extends AppCompatActivity {
             registro.put("telefono", telefono);
             registro.put("correo", correo);
             BaseDeDatos.insert("cliente", null, registro);
-            Toast.makeText(this, getString(R.string.toast_existecedula), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_registroexitoso), Toast.LENGTH_LONG).show();
         }
         fila.close();
         BaseDeDatos.close();

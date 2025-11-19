@@ -204,7 +204,6 @@ public class ClienteActivity extends AppCompatActivity {
             intent.putExtra("nombre", clienteSeleccionado.getNombre());
             intent.putExtra("telefono", clienteSeleccionado.getTelefono());
             intent.putExtra("correo", clienteSeleccionado.getCorreo());
-            // Indicamos que estamos en modo edición
             intent.putExtra("modoEdicion", true);
             startActivity(intent);
         } else {
