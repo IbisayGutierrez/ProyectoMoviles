@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Project</string>
+    <string name="app_name">CINEVERSE</string>
     <string name="tituloPelicula">Movie</string>
     <string name="titulo">Title</string>
     <string name="codigo">Code</string>
