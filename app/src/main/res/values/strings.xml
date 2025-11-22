@@ -29,7 +29,6 @@
     <string name="guardar">Guardar</string>
 
 
-
     <string name="titulo_pelicula">PELÍCULA</string>
     <string name="codigo_pelicula">Código película</string>
     <string name="buscar_pelicula">Buscar Película</string>
@@ -130,10 +129,6 @@
     <string name="toast_sesionexitoso">Inicio de sesión exitoso</string>
     <string name="toast_sesionincorrecta">Cédula o contraseña incorrecta</string>
     <string name="toast_foto">Debe tomar una foto para registrar la película.</string>
-
-
-
-
 
 
 </resources>

@@ -24,7 +24,9 @@ import java.io.ByteArrayOutputStream;
 
 public class CrearPelicula extends AppCompatActivity {
 
-    EditText txtCodigo, txtTitulo,txtDuracion, txtGenero;
+    EditText txtCodigo, txtTitulo,txtDuracion, txtGenero,txtlatitud, txtlongitud;
+
+    static final int REQ_UBICACION = 100;
     boolean modoEdicion = false;
     int codigoOriginal;
     private ActivityResultLauncher<Intent> lanzadorTomarFoto;
@@ -47,6 +49,8 @@ public class CrearPelicula extends AppCompatActivity {
         txtDuracion = findViewById(R.id.txtDuracion);
         txtGenero = findViewById(R.id.txtGenero);
         vistaImagen = findViewById(R.id.imagen);
+        txtlatitud = findViewById(R.id.txtlatitud);
+        txtlongitud = findViewById(R.id.txtlongitud);
 
         Intent intent = getIntent();
         if (intent != null && intent.getBooleanExtra("modoEdicion", false)) {
@@ -59,6 +63,7 @@ public class CrearPelicula extends AppCompatActivity {
             txtGenero.setText(intent.getStringExtra("genero"));
             txtCodigo.setEnabled(false);
             cargarImagen();
+            cargarUbicacion();
         }
 
         lanzadorTomarFoto = registerForActivityResult(
@@ -70,6 +75,24 @@ public class CrearPelicula extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    public void AbrirMapa(View view) {
+        Intent i = new Intent(this, UbicacionActivity.class); // o el nombre de tu activity del mapa
+        // Si quieres mandar una ubicación inicial, puedes pasarla aquí también
+        startActivityForResult(i, REQ_UBICACION);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQ_UBICACION && resultCode == RESULT_OK && data != null) {
+            String lat = data.getStringExtra("latitud");
+            String lon = data.getStringExtra("longitud");
+
+            txtlatitud.setText(lat);
+            txtlongitud.setText(lon);
+        }
     }
 
     public void tomarFoto(View vista) {
@@ -97,15 +120,43 @@ public class CrearPelicula extends AppCompatActivity {
         BaseDatos.close();
     }
 
+    public void cargarUbicacion() {
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
+        SQLiteDatabase BaseDatos = admin.getReadableDatabase();
+
+        Cursor cursor = BaseDatos.rawQuery(
+                "SELECT latitud, longitud FROM pelicula WHERE codigo = ?",
+                new String[]{String.valueOf(codigoOriginal)}
+        );
+
+        if (cursor.moveToFirst()) {
+            String lat = cursor.getString(0);
+            String lon = cursor.getString(1);
+
+            if (lat != null) txtlatitud.setText(lat);
+            if (lon != null) txtlongitud.setText(lon);
+        }
+
+        cursor.close();
+        BaseDatos.close();
+    }
+
     public void Insertar(View view) {
 
         String codigoStr = txtCodigo.getText().toString().trim();
         String titulo = txtTitulo.getText().toString().trim();
         String duracionStr = txtDuracion.getText().toString().trim();
         String genero = txtGenero.getText().toString().trim();
+        String latitudStr = txtlatitud.getText().toString().trim();
+        String longitudStr = txtlongitud.getText().toString().trim();
 
         if (codigoStr.isEmpty() || titulo.isEmpty() || duracionStr.isEmpty() || genero.isEmpty()) {
             Toast.makeText(this, getString(R.string.toast_insertartodo), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (latitudStr.isEmpty() || longitudStr.isEmpty()) {
+            Toast.makeText(this, "Seleccione una ubicación en el mapa", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -129,6 +180,8 @@ public class CrearPelicula extends AppCompatActivity {
             txtGenero.setText("");
             vistaImagen.setImageBitmap(null);
             imagenBitmap = null;
+            txtlatitud.setText("");
+            txtlongitud.setText("");
 
         } else {
             Toast.makeText(this, getString(R.string.toast_insertartodo), Toast.LENGTH_LONG).show();
@@ -138,6 +191,8 @@ public class CrearPelicula extends AppCompatActivity {
 
     public void Registrar(int codigo, String titulo, int duracion, String genero)
     {
+        String latitud = txtlatitud.getText().toString().trim();
+        String longitud = txtlongitud.getText().toString().trim();
         AdminDB admin = new AdminDB (this, "Proyecto", null, 2);
         SQLiteDatabase BaseDatos = admin.getWritableDatabase();
 
@@ -150,6 +205,8 @@ public class CrearPelicula extends AppCompatActivity {
             registro.put("titulo", titulo);
             registro.put("duracion", duracion);
             registro.put("genero", genero);
+            registro.put("latitud", latitud);
+            registro.put("longitud", longitud);
 
             if (imagenBitmap != null) {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -172,6 +229,8 @@ public class CrearPelicula extends AppCompatActivity {
         String nuevoTitulo = txtTitulo.getText().toString().trim();
         String nuevaDuracionTxt = txtDuracion.getText().toString().trim();
         String nuevoGenero = txtGenero.getText().toString().trim();
+        String nuevaLatitud = txtlatitud.getText().toString().trim();
+        String nuevaLongitud = txtlongitud.getText().toString().trim();
 
         if (nuevoTitulo.isEmpty() || nuevaDuracionTxt.isEmpty() || nuevoGenero.isEmpty()) {
             Toast.makeText(this, getString(R.string.toast_insertartodo), Toast.LENGTH_LONG).show();
@@ -187,6 +246,8 @@ public class CrearPelicula extends AppCompatActivity {
         registro.put("titulo", nuevoTitulo);
         registro.put("duracion", nuevaDuracion);
         registro.put("genero", nuevoGenero);
+        registro.put("latitud", nuevaLatitud);
+        registro.put("longitud", nuevaLongitud);
         if (imagenBitmap != null) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             imagenBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
