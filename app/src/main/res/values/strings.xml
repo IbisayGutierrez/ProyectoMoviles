@@ -129,6 +129,7 @@
     <string name="toast_existecodigo">Ya existe una película con ese código</string>
     <string name="toast_sesionexitoso">Inicio de sesión exitoso</string>
     <string name="toast_sesionincorrecta">Cédula o contraseña incorrecta</string>
+    <string name="toast_foto">Debe tomar una foto para registrar la película.</string>
 
 
 

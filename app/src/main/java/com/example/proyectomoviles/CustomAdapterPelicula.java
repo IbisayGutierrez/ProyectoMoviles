@@ -1,6 +1,8 @@
 package com.example.proyectomoviles;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,22 +43,25 @@ public class CustomAdapterPelicula extends BaseAdapter {
         TextView TextViewDuracion;
         TextView TextViewTitulo;
 
-        Pelicula p=lst.get(i);
+        Pelicula p = lst.get(i);
+        if (view == null)
+            view = LayoutInflater.from(context).inflate(R.layout.listview_personalizado, null);
 
-        if (view==null)
-            view= LayoutInflater.from(context).inflate(R.layout.listview_personalizado,null);
-
-        ImageViewPelicula=view.findViewById(R.id.imageViewContacto);
-        TextViewDuracion=view.findViewById(R.id.textViewDes);
-        TextViewTitulo=view.findViewById(R.id.textViewNombre);
-
-        ImageViewPelicula.setImageResource(R.drawable.cineverse);
-        TextViewDuracion.setText(String.valueOf(p.getDuracion()) + " " + context.getString(R.string.minutos));
+        ImageViewPelicula = view.findViewById(R.id.imageViewContacto);
+        TextViewDuracion = view.findViewById(R.id.textViewDes);
+        TextViewTitulo = view.findViewById(R.id.textViewNombre);
+        byte[] imagenBytes = p.getImagen();
+        if (imagenBytes != null && imagenBytes.length > 0) {
+            Bitmap bmp = BitmapFactory.decodeByteArray(imagenBytes, 0, imagenBytes.length);
+            ImageViewPelicula.setImageBitmap(bmp);
+        } else {
+            ImageViewPelicula.setImageResource(R.drawable.cineverse);
+        }
+        TextViewDuracion.setText(p.getDuracion() + " " + context.getString(R.string.minutos));
         TextViewTitulo.setText(p.getTitulo());
-
         return view;
-
     }
+
     public void remove(Pelicula pelicula) {
         lst.remove(pelicula);
         notifyDataSetChanged();

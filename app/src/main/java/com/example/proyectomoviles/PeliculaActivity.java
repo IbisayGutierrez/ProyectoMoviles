@@ -35,7 +35,7 @@ public class PeliculaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_pelicula);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.tomarFoto), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -76,19 +76,32 @@ public class PeliculaActivity extends AppCompatActivity {
     private void cargarPeliculas() {
         AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
         SQLiteDatabase bd = admin.getReadableDatabase();
-        Cursor fila = bd.rawQuery("SELECT codigo, titulo, duracion, genero FROM pelicula", null);
+
+        Cursor fila = bd.rawQuery("SELECT * FROM pelicula", null);
+        datos.clear();
         if (fila.moveToFirst()) {
             do {
                 int codigo = fila.getInt(0);
                 String titulo = fila.getString(1);
                 int duracion = fila.getInt(2);
                 String genero = fila.getString(3);
-                Pelicula p = new Pelicula(codigo, titulo, duracion, genero);
+                byte[] imagen = fila.getBlob(4);
+                byte[] audio = fila.getBlob(5);
+                String latitud = fila.getString(6);
+                String longitud = fila.getString(7);
+
+                Pelicula p = new Pelicula(
+                        codigo, titulo, duracion, genero,
+                        imagen, audio, latitud, longitud
+                );
+
                 datos.add(p);
+
             } while (fila.moveToNext());
         } else {
             Toast.makeText(this, getString(R.string.toast_noregistro), Toast.LENGTH_LONG).show();
         }
+
         fila.close();
         bd.close();
         adapter.notifyDataSetChanged();
@@ -159,7 +172,10 @@ public class PeliculaActivity extends AppCompatActivity {
         if (nombretxt.isEmpty()) {
             fila = BaseDatos.rawQuery("SELECT * FROM pelicula", null);
         } else {
-            fila = BaseDatos.rawQuery("SELECT * FROM pelicula WHERE titulo='" + nombretxt + "'", null);
+            fila = BaseDatos.rawQuery(
+                    "SELECT * FROM pelicula WHERE titulo = ?",
+                    new String[]{nombretxt}
+            );
         }
 
         adapter.clear();
@@ -170,18 +186,25 @@ public class PeliculaActivity extends AppCompatActivity {
                 String titulo = fila.getString(1);
                 int duracion = fila.getInt(2);
                 String genero = fila.getString(3);
+                byte[] imagen = fila.getBlob(4);
+                byte[] audio = fila.getBlob(5);
+                String latitud = fila.getString(6);
+                String longitud = fila.getString(7);
 
-                Pelicula p = new Pelicula(codigo, titulo, duracion, genero);
+                Pelicula p = new Pelicula(codigo, titulo, duracion, genero, imagen, audio, latitud, longitud);
                 adapter.add(p);
+
             } while (fila.moveToNext());
+
             Toast.makeText(this, getString(R.string.toast_registoencontrado), Toast.LENGTH_LONG).show();
+
         } else {
             Toast.makeText(this, getString(R.string.toast_noregistro), Toast.LENGTH_LONG).show();
         }
-
         fila.close();
         BaseDatos.close();
     }
+
 
     public void Editar(View view) {
         if (itemseleccionado >= 0) {

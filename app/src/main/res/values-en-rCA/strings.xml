@@ -130,5 +130,6 @@
     <string name="toast_existecodigo">There is already a movie with that code</string>
     <string name="toast_sesionexitoso">Successful login</string>
     <string name="toast_sesionincorrecta">Incorrect ID or password</string>
+    <string name="toast_foto">You must take a photo to register the film.</string>
 
 </resources>
