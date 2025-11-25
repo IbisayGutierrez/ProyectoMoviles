@@ -1,13 +1,18 @@
 package com.example.proyectomoviles;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -16,23 +21,41 @@ import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class CrearPelicula extends AppCompatActivity {
 
     EditText txtCodigo, txtTitulo,txtDuracion, txtGenero,txtlatitud, txtlongitud;
 
+    // NUEVOS BOTONES DE AUDIO
+    Button btnIniciarGrabacion, btnDetenerGrabacion, btnReproducirAudio, btnDetenerReproduccion;
+
     static final int REQ_UBICACION = 100;
+    private static final int REQUEST_PERMISSION_CODE = 1000; // NUEVO
+
     boolean modoEdicion = false;
     int codigoOriginal;
     private ActivityResultLauncher<Intent> lanzadorTomarFoto;
     private Bitmap imagenBitmap;
     private ImageView vistaImagen;
 
+
+    private MediaRecorder mediaRecorder;
+    private MediaPlayer mediaPlayer;
+    private boolean isRecording = false;
+    private boolean isPlaying = false;
+    private String outputFile;
+    private byte[] audioData = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +75,30 @@ public class CrearPelicula extends AppCompatActivity {
         txtlatitud = findViewById(R.id.txtlatitud);
         txtlongitud = findViewById(R.id.txtlongitud);
 
+
+        btnIniciarGrabacion = findViewById(R.id.btnIniciarGrabacion);
+        btnDetenerGrabacion = findViewById(R.id.btnDetenerGrabacion);
+        btnReproducirAudio = findViewById(R.id.btnReproducirAudio);
+        btnDetenerReproduccion = findViewById(R.id.btnDetenerReproduccion);
+
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.RECORD_AUDIO}, REQUEST_PERMISSION_CODE);
+        }
+
+
+        outputFile = getExternalFilesDir(null).getAbsolutePath() + "/audio_pelicula.3gp";
+
+        mediaRecorder = new MediaRecorder();
+        mediaPlayer = new MediaPlayer();
+
+
+        btnDetenerGrabacion.setEnabled(false);
+        btnReproducirAudio.setEnabled(false);
+        btnDetenerReproduccion.setEnabled(false);
+
         Intent intent = getIntent();
         if (intent != null && intent.getBooleanExtra("modoEdicion", false)) {
 
@@ -64,6 +111,7 @@ public class CrearPelicula extends AppCompatActivity {
             txtCodigo.setEnabled(false);
             cargarImagen();
             cargarUbicacion();
+            cargarAudio();
         }
 
         lanzadorTomarFoto = registerForActivityResult(
@@ -77,9 +125,127 @@ public class CrearPelicula extends AppCompatActivity {
         );
     }
 
+
+    public void iniciarGrabacion(View view) {
+        try {
+            mediaRecorder = new MediaRecorder();
+            mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            mediaRecorder.setOutputFile(outputFile);
+            mediaRecorder.prepare();
+            mediaRecorder.start();
+            isRecording = true;
+
+            btnIniciarGrabacion.setEnabled(false);
+            btnDetenerGrabacion.setEnabled(true);
+            btnReproducirAudio.setEnabled(false);
+            Toast.makeText(this, "Grabación iniciada", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error al iniciar grabación: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void detenerGrabacion(View view) {
+        if (mediaRecorder != null && isRecording) {
+            try {
+                mediaRecorder.stop();
+                mediaRecorder.reset();
+                isRecording = false;
+
+
+                File audioFile = new File(outputFile);
+                audioData = new byte[(int) audioFile.length()];
+                FileInputStream fis = new FileInputStream(audioFile);
+                fis.read(audioData);
+                fis.close();
+
+                btnIniciarGrabacion.setEnabled(true);
+                btnDetenerGrabacion.setEnabled(false);
+                btnReproducirAudio.setEnabled(true);
+                Toast.makeText(this, "Audio grabado exitosamente", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Error al detener grabación", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public void reproducirAudio(View view) {
+        try {
+            if (audioData != null) {
+
+                File tempFile = new File(getExternalFilesDir(null), "temp_audio.3gp");
+                FileOutputStream fos = new FileOutputStream(tempFile);
+                fos.write(audioData);
+                fos.close();
+
+                mediaPlayer = new MediaPlayer();
+                mediaPlayer.setDataSource(tempFile.getAbsolutePath());
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+                isPlaying = true;
+
+                btnReproducirAudio.setEnabled(false);
+                btnDetenerReproduccion.setEnabled(true);
+                Toast.makeText(this, "Reproduciendo audio", Toast.LENGTH_SHORT).show();
+
+
+                mediaPlayer.setOnCompletionListener(mp -> {
+                    btnReproducirAudio.setEnabled(true);
+                    btnDetenerReproduccion.setEnabled(false);
+                    isPlaying = false;
+                });
+            } else {
+                Toast.makeText(this, "No hay audio para reproducir", Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error al reproducir audio", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void detenerReproduccion(View view) {
+        if (mediaPlayer != null && isPlaying) {
+            try {
+                mediaPlayer.stop();
+                mediaPlayer.reset();
+                isPlaying = false;
+
+                btnReproducirAudio.setEnabled(true);
+                btnDetenerReproduccion.setEnabled(false);
+                Toast.makeText(this, "Reproducción detenida", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void cargarAudio() {
+        AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
+        SQLiteDatabase BaseDatos = admin.getReadableDatabase();
+
+        Cursor cursor = BaseDatos.rawQuery(
+                "SELECT audio FROM pelicula WHERE codigo = ?",
+                new String[]{String.valueOf(codigoOriginal)}
+        );
+
+        if (cursor.moveToFirst()) {
+            audioData = cursor.getBlob(0);
+            if (audioData != null && audioData.length > 0) {
+                btnReproducirAudio.setEnabled(true);
+                Toast.makeText(this, "Audio cargado", Toast.LENGTH_SHORT).show();
+            }
+        }
+        cursor.close();
+        BaseDatos.close();
+    }
+
+
+
     public void AbrirMapa(View view) {
-        Intent i = new Intent(this, UbicacionActivity.class); // o el nombre de tu activity del mapa
-        // Si quieres mandar una ubicación inicial, puedes pasarla aquí también
+        Intent i = new Intent(this, UbicacionActivity.class);
         startActivityForResult(i, REQ_UBICACION);
     }
 
@@ -174,6 +340,7 @@ public class CrearPelicula extends AppCompatActivity {
         }
         if (codigo > 0 && duracion > 0) {
             Registrar(codigo, titulo, duracion, genero);
+
             txtCodigo.setText("");
             txtTitulo.setText("");
             txtDuracion.setText("");
@@ -182,6 +349,13 @@ public class CrearPelicula extends AppCompatActivity {
             imagenBitmap = null;
             txtlatitud.setText("");
             txtlongitud.setText("");
+            audioData = null;
+
+
+            btnIniciarGrabacion.setEnabled(true);
+            btnDetenerGrabacion.setEnabled(false);
+            btnReproducirAudio.setEnabled(false);
+            btnDetenerReproduccion.setEnabled(false);
 
         } else {
             Toast.makeText(this, getString(R.string.toast_insertartodo), Toast.LENGTH_LONG).show();
@@ -216,6 +390,13 @@ public class CrearPelicula extends AppCompatActivity {
                 registro.put("imagen", (byte[]) null);
             }
 
+
+            if (audioData != null) {
+                registro.put("audio", audioData);
+            } else {
+                registro.put("audio", (byte[]) null);
+            }
+
             BaseDatos.insert("pelicula", null, registro);
             Toast.makeText(this, getString(R.string.toast_registroexitoso), Toast.LENGTH_LONG).show();
         }
@@ -248,11 +429,18 @@ public class CrearPelicula extends AppCompatActivity {
         registro.put("genero", nuevoGenero);
         registro.put("latitud", nuevaLatitud);
         registro.put("longitud", nuevaLongitud);
+
         if (imagenBitmap != null) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             imagenBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             registro.put("imagen", stream.toByteArray());
         }
+
+
+        if (audioData != null) {
+            registro.put("audio", audioData);
+        }
+
         int filas = BaseDatos.update("pelicula", registro, "codigo=?", new String[]{String.valueOf(codigoOriginal)});
         BaseDatos.close();
         if (filas > 0) {
@@ -269,4 +457,17 @@ public class CrearPelicula extends AppCompatActivity {
         finish();
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaRecorder != null) {
+            mediaRecorder.release();
+            mediaRecorder = null;
+        }
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
 }

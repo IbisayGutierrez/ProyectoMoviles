@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.util.Locale;
 
 import java.util.List;
+import java.util.Locale;
 
 public class CustomAdapterPelicula extends BaseAdapter {
 
@@ -55,6 +55,7 @@ public class CustomAdapterPelicula extends BaseAdapter {
         TextViewTitulo = view.findViewById(R.id.textViewNombre);
         TextViewLongitud = view.findViewById(R.id.textViewLon);
         TextViewLatitud = view.findViewById(R.id.textViewLat);
+
         byte[] imagenBytes = p.getImagen();
         if (imagenBytes != null && imagenBytes.length > 0) {
             Bitmap bmp = BitmapFactory.decodeByteArray(imagenBytes, 0, imagenBytes.length);
@@ -62,8 +63,10 @@ public class CustomAdapterPelicula extends BaseAdapter {
         } else {
             ImageViewPelicula.setImageResource(R.drawable.cineverse);
         }
+
         TextViewDuracion.setText(p.getDuracion() + " " + context.getString(R.string.minutos));
         TextViewTitulo.setText(p.getTitulo());
+
         try {
             double lat = Double.parseDouble(p.getLatitud());
             double lon = Double.parseDouble(p.getLongitud());
@@ -74,10 +77,10 @@ public class CustomAdapterPelicula extends BaseAdapter {
             TextViewLatitud.setText("Lat: " + lat4);
             TextViewLongitud.setText("Lon: " + lon4);
         } catch (NumberFormatException e) {
-
             TextViewLatitud.setText("Lat: " + p.getLatitud());
             TextViewLongitud.setText("Lon: " + p.getLongitud());
         }
+
         return view;
     }
 
@@ -95,5 +98,4 @@ public class CustomAdapterPelicula extends BaseAdapter {
         lst.add(pelicula);
         notifyDataSetChanged();
     }
-
 }
