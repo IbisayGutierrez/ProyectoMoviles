@@ -61,12 +61,6 @@ public class PeliculaActivity extends AppCompatActivity {
         });
     }
 
-    public void Regresar(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-
-    }
-
     public void Agregar(View view) {
         Intent intent = new Intent(this, CrearPelicula.class);
         startActivity(intent);

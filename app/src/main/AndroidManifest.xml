@@ -22,28 +22,10 @@
             android:name=".UbicacionActivity"
             android:exported="false" />
         <activity
-            android:name=".CrearCliente"
-            android:exported="false" />
-        <activity
             android:name=".CrearPelicula"
             android:exported="false" />
         <activity
-            android:name=".Funcion"
-            android:exported="false" />
-        <activity
-            android:name=".ConsultarFunciones"
-            android:exported="false"></activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
-        <activity
             android:name=".PeliculaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ClienteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".InicioSesionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
