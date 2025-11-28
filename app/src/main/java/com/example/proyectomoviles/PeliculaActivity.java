@@ -56,7 +56,7 @@ public class PeliculaActivity extends AppCompatActivity {
             for (int i = 0; i < lista.getChildCount(); i++) {
                 lista.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
             }
-            view.setBackgroundColor(Color.GREEN);
+            view.setBackgroundColor(Color.GRAY);
             activarBtn();
         });
     }
@@ -139,19 +139,11 @@ public class PeliculaActivity extends AppCompatActivity {
     private void inicializarBtn() {
         editar = findViewById(R.id.btnEditar);
         eliminar = findViewById(R.id.btnEliminar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            editar.setForeground(getDrawable(R.drawable.edit_disable));
-            eliminar.setForeground(getDrawable(R.drawable.delete_disable));
-        }
         editar.setEnabled(false);
         eliminar.setEnabled(false);
     }
 
     private void activarBtn() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            editar.setForeground(getDrawable(R.drawable.edit_enable));
-            eliminar.setForeground(getDrawable(R.drawable.delete_enable));
-        }
         editar.setEnabled(true);
         eliminar.setEnabled(true);
 

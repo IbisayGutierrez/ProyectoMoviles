@@ -13,18 +13,27 @@
         tools:context=".CrearPelicula">
 
 
-        <ImageView
-            android:id="@+id/imagen"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardImagen"
             android:layout_width="196dp"
             android:layout_height="107dp"
             android:layout_marginTop="28dp"
-            android:background="@android:drawable/picture_frame"
-            android:clipToOutline="true"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.469"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPelicula"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewPelicula" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
+
+            <ImageView
+                android:id="@+id/imagen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
 
         <TextView
             android:id="@+id/textViewPelicula"
@@ -47,23 +56,21 @@
             android:id="@+id/txtCodigo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="69dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/codigo"
             android:inputType="text"
-            app:layout_constraintBottom_toTopOf="@+id/txtTitulo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintHorizontal_bias="0.308"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imagen" />
+            app:layout_constraintTop_toBottomOf="@+id/button" />
 
         <ImageView
             android:id="@+id/imageView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="67dp"
-            android:layout_marginTop="33dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
             app:srcCompat="@drawable/duracion" />
@@ -72,8 +79,8 @@
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="67dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
             app:srcCompat="@drawable/titulo" />
@@ -83,12 +90,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="4dp"
             android:ems="10"
             android:hint="@string/duracion"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.459"
+            app:layout_constraintHorizontal_bias="0.248"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
 
@@ -96,12 +103,11 @@
             android:id="@+id/txtGenero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:ems="10"
             android:hint="@string/genero"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintHorizontal_bias="0.298"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtDuracion" />
 
@@ -109,8 +115,8 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="276dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="268dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/codigo" />
@@ -119,10 +125,8 @@
             android:id="@+id/imageView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
-            app:layout_constraintEnd_toStartOf="@+id/txtGenero"
-            app:layout_constraintHorizontal_bias="0.836"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView7"
             app:srcCompat="@drawable/genero" />
@@ -131,35 +135,20 @@
             android:id="@+id/txtTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="@string/titulo"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintHorizontal_bias="0.308"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtCodigo" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="51dp"
-            android:layout_height="28dp"
-            android:layout_marginStart="180dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="180dp"
-            android:background="@android:color/transparent"
-            android:foreground="@drawable/camara"
-            android:onClick="tomarFoto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imagen" />
-
         <EditText
             android:id="@+id/txtlatitud"
-            android:layout_width="136dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="11dp"
+            android:layout_width="110dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="9dp"
             android:clickable="false"
             android:ems="10"
             android:focusable="false"
@@ -171,10 +160,11 @@
 
         <EditText
             android:id="@+id/txtlongitud"
-            android:layout_width="136dp"
+            android:layout_width="108dp"
             android:layout_height="43dp"
+            android:layout_marginStart="3dp"
             android:layout_marginTop="11dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="122dp"
             android:clickable="false"
             android:ems="10"
             android:focusable="false"
@@ -182,25 +172,33 @@
             android:hint="Longitud"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtlatitud"
             app:layout_constraintTop_toBottomOf="@+id/txtGenero" />
 
-        <Button
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="124dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="64dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="455dp"
             android:onClick="AbrirMapa"
-            android:text="Insertar ubicacion"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtlatitud" />
+            android:text=""
+            android:textColor="@android:color/white"
+            app:backgroundTint="#1976D2"
+            app:cardElevation="6dp"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/add_location"
+            app:layout_constraintStart_toEndOf="@+id/txtlongitud"
+            app:layout_constraintTop_toTopOf="parent"
+            app:rippleColor="?attr/colorPrimary" />
 
         <ImageView
             android:id="@+id/imageView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="67dp"
-            android:layout_marginTop="27dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="26dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView8"
             app:srcCompat="@drawable/mundo" />
@@ -209,13 +207,14 @@
             android:id="@+id/textViewAudio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="44dp"
             android:text="Audio de la Película"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.483"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button2" />
+            app:layout_constraintTop_toBottomOf="@+id/txtlatitud" />
 
         <LinearLayout
             android:id="@+id/layoutAudioControls"
@@ -230,78 +229,127 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnIniciarGrabacion"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="4dp"
                 android:onClick="iniciarGrabacion"
-                android:text="Grabar"
-                android:textSize="12sp" />
+                android:text=""
+                android:textSize="12sp"
+                app:icon="@drawable/mic"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:rippleColor="?attr/colorPrimary"
+                app:backgroundTint="#D32F2F"
+                app:cornerRadius="20dp"
+                app:iconTint="@android:color/white"
+                android:textColor="@android:color/white" />
 
-            <Button
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDetenerGrabacion"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
+                android:layout_height="48dp"
                 android:layout_weight="1"
+                android:layout_marginEnd="4dp"
                 android:onClick="detenerGrabacion"
-                android:text="Detener"
-                android:textSize="12sp" />
+                android:text=""
+                android:textSize="12sp"
+                app:icon="@drawable/stop"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:rippleColor="?attr/colorPrimary"
+                app:backgroundTint="#D32F2F"
+                app:cornerRadius="20dp"
+                app:iconTint="@android:color/white"
+                android:textColor="@android:color/white" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnReproducirAudio"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 android:onClick="reproducirAudio"
-                android:text="Reproducir"
-                android:textSize="12sp" />
+                android:text=""
+                android:textSize="12sp"
+                android:textColor="@android:color/white"
+                app:icon="@drawable/play"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconTint="@android:color/white"
+                app:backgroundTint="#1976D2"
+                app:cornerRadius="20dp"
+                app:cardElevation="6dp"/>
 
-            <Button
-                android:id="@+id/btnDetenerReproduccion"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="4dp"
-                android:onClick="detenerReproduccion"
-                android:text="Parar"
-                android:textSize="12sp" />
 
         </LinearLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGuardar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="108dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="20dp"
             android:onClick="Insertar"
             android:text="@string/guardar"
+            android:textColor="@android:color/white"
+            app:backgroundTint="#1976D2"
+            app:cornerRadius="20dp"
+            app:cardElevation="6dp"
+            app:rippleColor="?attr/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/btnCancelar"
-            app:layout_constraintTop_toBottomOf="@+id/layoutAudioControls" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutAudioControls"
+            />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancelar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="48dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="20dp"
             android:onClick="Regresar"
             android:text="@string/cancelar"
+            android:textColor="@android:color/white"
+            app:backgroundTint="#D32F2F"
+            app:cornerRadius="20dp"
+            app:cardElevation="6dp"
+            app:rippleColor="?attr/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutAudioControls" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutAudioControls"
+            />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button"
+            android:layout_width="45dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="180dp"
+            android:layout_marginEnd="186dp"
+            android:onClick="tomarFoto"
+            android:text=""
+            app:backgroundTint="#1976D2"
+            app:cardElevation="6dp"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/camara"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconTint="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardImagen"
+            app:rippleColor="?attr/colorPrimary" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

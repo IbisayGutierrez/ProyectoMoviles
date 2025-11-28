@@ -38,7 +38,7 @@ public class CrearPelicula extends AppCompatActivity {
     EditText txtCodigo, txtTitulo,txtDuracion, txtGenero,txtlatitud, txtlongitud;
 
     // NUEVOS BOTONES DE AUDIO
-    Button btnIniciarGrabacion, btnDetenerGrabacion, btnReproducirAudio, btnDetenerReproduccion;
+    Button btnIniciarGrabacion, btnDetenerGrabacion, btnReproducirAudio;
 
     static final int REQ_UBICACION = 100;
     private static final int REQUEST_PERMISSION_CODE = 1000; // NUEVO
@@ -79,7 +79,6 @@ public class CrearPelicula extends AppCompatActivity {
         btnIniciarGrabacion = findViewById(R.id.btnIniciarGrabacion);
         btnDetenerGrabacion = findViewById(R.id.btnDetenerGrabacion);
         btnReproducirAudio = findViewById(R.id.btnReproducirAudio);
-        btnDetenerReproduccion = findViewById(R.id.btnDetenerReproduccion);
 
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
@@ -97,7 +96,6 @@ public class CrearPelicula extends AppCompatActivity {
 
         btnDetenerGrabacion.setEnabled(false);
         btnReproducirAudio.setEnabled(false);
-        btnDetenerReproduccion.setEnabled(false);
 
         Intent intent = getIntent();
         if (intent != null && intent.getBooleanExtra("modoEdicion", false)) {
@@ -188,13 +186,11 @@ public class CrearPelicula extends AppCompatActivity {
                 isPlaying = true;
 
                 btnReproducirAudio.setEnabled(false);
-                btnDetenerReproduccion.setEnabled(true);
                 Toast.makeText(this, "Reproduciendo audio", Toast.LENGTH_SHORT).show();
 
 
                 mediaPlayer.setOnCompletionListener(mp -> {
                     btnReproducirAudio.setEnabled(true);
-                    btnDetenerReproduccion.setEnabled(false);
                     isPlaying = false;
                 });
             } else {
@@ -214,7 +210,6 @@ public class CrearPelicula extends AppCompatActivity {
                 isPlaying = false;
 
                 btnReproducirAudio.setEnabled(true);
-                btnDetenerReproduccion.setEnabled(false);
                 Toast.makeText(this, "Reproducción detenida", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -355,7 +350,6 @@ public class CrearPelicula extends AppCompatActivity {
             btnIniciarGrabacion.setEnabled(true);
             btnDetenerGrabacion.setEnabled(false);
             btnReproducirAudio.setEnabled(false);
-            btnDetenerReproduccion.setEnabled(false);
 
         } else {
             Toast.makeText(this, getString(R.string.toast_insertartodo), Toast.LENGTH_LONG).show();
