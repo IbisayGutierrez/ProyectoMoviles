@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Colores principales de tu appbar y botones -->
+    <color name="colorPrimary">#1976D2</color>       <!-- Azul -->
+    <color name="colorSecondary">#03DAC5</color>     <!-- Turquesa -->
+
 </resources>

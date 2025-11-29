@@ -12,13 +12,25 @@
         android:layout_height="wrap_content"
         tools:context=".CrearPelicula">
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="@string/tituloPelicula"
+            app:titleTextColor="?attr/colorOnPrimary"
+            app:navigationIcon="@drawable/ic_arrow_back_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardImagen"
             android:layout_width="196dp"
             android:layout_height="107dp"
             android:layout_marginTop="28dp"
-            app:layout_constraintTop_toBottomOf="@+id/textViewPelicula"
+            app:layout_constraintTop_toBottomOf="@id/topAppBar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:cardCornerRadius="16dp"
@@ -35,22 +47,6 @@
 
 
 
-        <TextView
-            android:id="@+id/textViewPelicula"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="130dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="130dp"
-            android:layout_marginBottom="33dp"
-            android:text="@string/tituloPelicula"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/txtCodigo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.328"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/txtCodigo"

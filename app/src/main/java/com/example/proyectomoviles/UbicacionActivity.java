@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.appbar.MaterialToolbar;
+
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.events.MapEventsReceiver;
@@ -35,6 +37,12 @@ public class UbicacionActivity extends AppCompatActivity {
         // Requerido por osmdroid
         Configuration.getInstance().setUserAgentValue(getPackageName());
         setContentView(R.layout.activity_ubicacion);
+
+        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
 
         // Referencias UI
         map = findViewById(R.id.map);

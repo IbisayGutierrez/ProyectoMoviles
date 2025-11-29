@@ -33,6 +33,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import com.google.android.material.appbar.MaterialToolbar;
+
 public class CrearPelicula extends AppCompatActivity {
 
     EditText txtCodigo, txtTitulo,txtDuracion, txtGenero,txtlatitud, txtlongitud;
@@ -67,6 +69,9 @@ public class CrearPelicula extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+
         txtCodigo = findViewById(R.id.txtCodigo);
         txtTitulo = findViewById(R.id.txtTitulo);
         txtDuracion = findViewById(R.id.txtDuracion);
@@ -121,6 +126,12 @@ public class CrearPelicula extends AppCompatActivity {
                     }
                 }
         );
+
+        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
     }
 
 
