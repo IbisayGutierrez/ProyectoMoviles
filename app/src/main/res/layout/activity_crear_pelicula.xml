@@ -299,12 +299,15 @@
             app:cornerRadius="20dp"
             app:cardElevation="6dp"
             app:rippleColor="?attr/colorPrimary"
+            app:icon="@drawable/save"
+            app:iconTint="@android:color/white"
+            app:iconPadding="8dp"
+            app:iconGravity="textStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/btnCancelar"
-            app:layout_constraintTop_toBottomOf="@+id/layoutAudioControls"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/layoutAudioControls" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancelar"
@@ -320,10 +323,14 @@
             app:cornerRadius="20dp"
             app:cardElevation="6dp"
             app:rippleColor="?attr/colorPrimary"
+            app:icon="@drawable/cancel"
+            app:iconTint="@android:color/white"
+            app:iconPadding="8dp"
+            app:iconGravity="textStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutAudioControls"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/layoutAudioControls" />
+
 
 
         <com.google.android.material.button.MaterialButton
