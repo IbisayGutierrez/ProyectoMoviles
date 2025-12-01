@@ -115,6 +115,9 @@ public class PeliculaActivity extends AppCompatActivity {
                 itemresaltado.setBackgroundColor(0);
             }
             itemseleccionado = -1;
+            editar.setEnabled(false);
+            eliminar.setEnabled(false);
+
         } else {
             Toast.makeText(this, getString(R.string.toast_seleccionedatos), Toast.LENGTH_LONG).show();
         }

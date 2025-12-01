@@ -49,60 +49,63 @@
         app:layout_constraintTop_toBottomOf="@id/topAppBar"
         app:rippleColor="?attr/colorSecondary" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAgregar"
-        style="@style/Widget.ProyectoMoviles.PrimaryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="39dp"
-        android:onClick="Agregar"
-        android:text="Agregar"
-        app:backgroundTint="?attr/colorPrimary"
-        app:icon="@drawable/add"
-        app:iconGravity="textStart"
-        app:iconPadding="8dp"
+    <LinearLayout
+        android:id="@+id/layoutBotones"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/ListViewMenu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ListViewMenu"
-        app:rippleColor="@color/white" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnEditar"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:onClick="Editar"
-        android:text="Editar"
-        app:backgroundTint="?attr/colorSecondary"
-        app:cornerRadius="12dp"
-        app:elevation="6dp"
-        app:icon="@drawable/edit"
-        app:iconGravity="textStart"
-        app:iconPadding="8dp"
-        app:layout_constraintStart_toEndOf="@+id/btnAgregar"
-        app:layout_constraintTop_toBottomOf="@+id/ListViewMenu"
-        app:rippleColor="@color/white" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAgregar"
+            style="@style/Widget.ProyectoMoviles.PrimaryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginEnd="12dp"
+            android:onClick="Agregar"
+            android:text="Agregar"
+            app:backgroundTint="?attr/colorPrimary"
+            app:icon="@drawable/add"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:rippleColor="@color/white" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnEliminar"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginEnd="15dp"
-        android:text="Eliminar"
-        android:textColor="@android:color/white"
-        app:backgroundTint="#D32F2F"
-        app:cornerRadius="16dp"
-        app:elevation="4dp"
-        app:icon="@drawable/delete"
-        app:iconGravity="start"
-        app:iconPadding="8dp"
-        app:iconTint="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnEditar"
-        app:layout_constraintTop_toBottomOf="@+id/ListViewMenu" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEditar"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginEnd="12dp"
+            android:onClick="Editar"
+            android:text="Editar"
+            app:backgroundTint="?attr/colorSecondary"
+            app:cornerRadius="12dp"
+            app:elevation="6dp"
+            app:icon="@drawable/edit"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:rippleColor="@color/white" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEliminar"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:onClick="Eliminar"
+            android:text="Eliminar"
+            android:textColor="@android:color/white"
+            app:backgroundTint="#D32F2F"
+            app:cornerRadius="16dp"
+            app:elevation="4dp"
+            app:icon="@drawable/delete"
+            app:iconGravity="start"
+            app:iconPadding="8dp"
+            app:iconTint="@android:color/white" />
+
+    </LinearLayout>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputBuscar"
