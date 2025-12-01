@@ -54,20 +54,42 @@ public class UbicacionActivity extends AppCompatActivity {
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setMultiTouchControls(true);
 
-        // Punto inicial (UTN, puedes cambiarlo)
-        GeoPoint utn = new GeoPoint(10.430684188597372, -85.08498580135634);
+        // 👇 Nueva lógica: tomar ubicación enviada o usar la de defecto
+        double latInicial = 10.430684188597372;
+        double lonInicial = -85.08498580135634;
+
+        Intent intent = getIntent();
+        if (intent != null &&
+                intent.hasExtra("latitud_actual") &&
+                intent.hasExtra("longitud_actual")) {
+
+            try {
+                String latStr = intent.getStringExtra("latitud_actual");
+                String lonStr = intent.getStringExtra("longitud_actual");
+
+                if (latStr != null && lonStr != null &&
+                        !latStr.isEmpty() && !lonStr.isEmpty()) {
+                    latInicial = Double.parseDouble(latStr);
+                    lonInicial = Double.parseDouble(lonStr);
+                }
+            } catch (NumberFormatException e) {
+                // Si algo falla, se queda con la ubicación por defecto
+            }
+        }
+
+        GeoPoint puntoInicial = new GeoPoint(latInicial, lonInicial);
         IMapController mapController = map.getController();
         mapController.setZoom(15.0);
-        mapController.setCenter(utn);
+        mapController.setCenter(puntoInicial);
 
-        // Marcador inicial
+        // Marcador inicial con la ubicación (guardada o por defecto)
         marca = new Marker(map);
-        marca.setPosition(utn);
-        marca.setTitle("Ubicación inicial");
+        marca.setPosition(puntoInicial);
+        marca.setTitle("Ubicación seleccionada");
         map.getOverlays().add(marca);
 
-        txtLatitud.setText(String.valueOf(utn.getLatitude()));
-        txtLongitud.setText(String.valueOf(utn.getLongitude()));
+        txtLatitud.setText(String.valueOf(puntoInicial.getLatitude()));
+        txtLongitud.setText(String.valueOf(puntoInicial.getLongitude()));
 
         // Listener para toques en el mapa
         MapEventsReceiver mapEventsReceiver = new MapEventsReceiver() {

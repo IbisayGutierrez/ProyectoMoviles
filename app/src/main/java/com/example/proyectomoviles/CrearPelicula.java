@@ -252,6 +252,15 @@ public class CrearPelicula extends AppCompatActivity {
 
     public void AbrirMapa(View view) {
         Intent i = new Intent(this, UbicacionActivity.class);
+
+        String lat = txtlatitud.getText().toString().trim();
+        String lon = txtlongitud.getText().toString().trim();
+
+        if (!lat.isEmpty() && !lon.isEmpty()) {
+            i.putExtra("latitud_actual", lat);
+            i.putExtra("longitud_actual", lon);
+        }
+
         startActivityForResult(i, REQ_UBICACION);
     }
 
