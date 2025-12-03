@@ -95,14 +95,13 @@
             android:layout_height="48dp"
             android:onClick="Eliminar"
             android:text="Eliminar"
-            android:textColor="@android:color/white"
             app:backgroundTint="#D32F2F"
             app:cornerRadius="16dp"
             app:elevation="4dp"
             app:icon="@drawable/delete"
             app:iconGravity="start"
             app:iconPadding="8dp"
-            app:iconTint="@android:color/white" />
+            app:rippleColor="@color/white" />
 
     </LinearLayout>
 
