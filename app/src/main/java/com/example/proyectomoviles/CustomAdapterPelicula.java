@@ -1,15 +1,23 @@
 package com.example.proyectomoviles;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -17,6 +25,7 @@ public class CustomAdapterPelicula extends BaseAdapter {
 
     Context context;
     List<Pelicula> lst;
+    private MediaPlayer mediaPlayer;
 
     public CustomAdapterPelicula(Context context, List<Pelicula> lst) {
         this.context = context;
@@ -45,6 +54,7 @@ public class CustomAdapterPelicula extends BaseAdapter {
         TextView TextViewTitulo;
         TextView TextViewLongitud;
         TextView TextViewLatitud;
+        MaterialButton btnReproducirAudio;
 
         Pelicula p = lst.get(i);
         if (view == null)
@@ -55,6 +65,8 @@ public class CustomAdapterPelicula extends BaseAdapter {
         TextViewTitulo = view.findViewById(R.id.textViewNombre);
         TextViewLongitud = view.findViewById(R.id.textViewLon);
         TextViewLatitud = view.findViewById(R.id.textViewLat);
+        btnReproducirAudio = view.findViewById(R.id.btnReproducirAudioItem);
+
 
         byte[] imagenBytes = p.getImagen();
         if (imagenBytes != null && imagenBytes.length > 0) {
@@ -81,7 +93,45 @@ public class CustomAdapterPelicula extends BaseAdapter {
             TextViewLongitud.setText("Lon: " + p.getLongitud());
         }
 
+        // Configurar botón de audio
+        byte[] audioBytes = p.getAudio();
+        if (audioBytes != null && audioBytes.length > 0) {
+            btnReproducirAudio.setVisibility(View.VISIBLE);
+            btnReproducirAudio.setOnClickListener(v -> reproducirAudio(audioBytes));
+        } else {
+            btnReproducirAudio.setVisibility(View.GONE);
+        }
+
         return view;
+    }
+
+    // MÉTODO SIMPLE PARA REPRODUCIR
+    private void reproducirAudio(byte[] audioData) {
+        try {
+            // Detener si hay algo reproduciéndose
+            if (mediaPlayer != null) {
+                mediaPlayer.stop();
+                mediaPlayer.release();
+            }
+
+            // Crear archivo temporal
+            File tempFile = new File(context.getExternalFilesDir(null), "temp_audio.3gp");
+            FileOutputStream fos = new FileOutputStream(tempFile);
+            fos.write(audioData);
+            fos.close();
+
+            // Reproducir
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.setDataSource(tempFile.getAbsolutePath());
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+
+            Toast.makeText(context, "Reproduciendo audio", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Error al reproducir", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void remove(Pelicula pelicula) {
@@ -97,5 +147,15 @@ public class CustomAdapterPelicula extends BaseAdapter {
     public void add(Pelicula pelicula) {
         lst.add(pelicula);
         notifyDataSetChanged();
+    }
+
+    public void liberarMediaPlayer() {
+        if (mediaPlayer != null) {
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+            }
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }

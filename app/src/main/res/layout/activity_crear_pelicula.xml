@@ -276,11 +276,10 @@
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
                 app:rippleColor="?attr/colorPrimary"
-                app:backgroundTint="#D32F2F"
+                app:backgroundTint="?attr/colorSurfaceVariant"
                 app:cornerRadius="20dp"
-                app:iconTint="@android:color/white"
-                android:textColor="@android:color/white" />
-
+                app:iconTint="?attr/colorOnSurfaceVariant"
+                android:textColor="?attr/colorOnSurfaceVariant" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDetenerGrabacion"
@@ -295,10 +294,10 @@
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
                 app:rippleColor="?attr/colorPrimary"
-                app:backgroundTint="#D32F2F"
+                app:backgroundTint="?attr/colorSurfaceVariant"
                 app:cornerRadius="20dp"
-                app:iconTint="@android:color/white"
-                android:textColor="@android:color/white" />
+                app:iconTint="?attr/colorOnSurfaceVariant"
+                android:textColor="?attr/colorOnSurfaceVariant" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnReproducirAudio"
@@ -306,19 +305,17 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
                 android:onClick="reproducirAudio"
                 android:text=""
                 android:textSize="12sp"
-                android:textColor="@android:color/white"
+                android:textColor="?attr/colorOnSurfaceVariant"
                 app:icon="@drawable/play"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
-                app:iconTint="@android:color/white"
-                app:backgroundTint="#1976D2"
+                app:iconTint="?attr/colorOnSurfaceVariant"
+                app:backgroundTint="?attr/colorSurfaceVariant"
                 app:cornerRadius="20dp"
                 app:cardElevation="6dp"/>
-
 
         </LinearLayout>
 

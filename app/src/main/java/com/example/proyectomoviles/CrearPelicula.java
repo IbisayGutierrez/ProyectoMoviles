@@ -68,9 +68,8 @@ public class CrearPelicula extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+
         });
-
-
 
         txtCodigo = findViewById(R.id.txtCodigo);
         txtTitulo = findViewById(R.id.txtTitulo);
@@ -137,6 +136,11 @@ public class CrearPelicula extends AppCompatActivity {
 
     public void iniciarGrabacion(View view) {
         try {
+            // Liberar MediaRecorder anterior si existe
+            if (mediaRecorder != null) {
+                mediaRecorder.release();
+            }
+
             mediaRecorder = new MediaRecorder();
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -149,8 +153,9 @@ public class CrearPelicula extends AppCompatActivity {
             btnIniciarGrabacion.setEnabled(false);
             btnDetenerGrabacion.setEnabled(true);
             btnReproducirAudio.setEnabled(false);
+
             Toast.makeText(this, "Grabación iniciada", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Error al iniciar grabación: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -160,31 +165,50 @@ public class CrearPelicula extends AppCompatActivity {
         if (mediaRecorder != null && isRecording) {
             try {
                 mediaRecorder.stop();
-                mediaRecorder.reset();
                 isRecording = false;
+                mediaRecorder.release();
+                mediaRecorder = null;
 
-
+                // Leer el archivo y guardarlo en memoria
                 File audioFile = new File(outputFile);
-                audioData = new byte[(int) audioFile.length()];
-                FileInputStream fis = new FileInputStream(audioFile);
-                fis.read(audioData);
-                fis.close();
+                if (audioFile.exists()) {
+                    audioData = new byte[(int) audioFile.length()];
+                    FileInputStream fis = new FileInputStream(audioFile);
+                    fis.read(audioData);
+                    fis.close();
 
-                btnIniciarGrabacion.setEnabled(true);
-                btnDetenerGrabacion.setEnabled(false);
-                btnReproducirAudio.setEnabled(true);
-                Toast.makeText(this, "Audio grabado exitosamente", Toast.LENGTH_SHORT).show();
+                    btnIniciarGrabacion.setEnabled(true);
+                    btnDetenerGrabacion.setEnabled(false);
+                    btnReproducirAudio.setEnabled(true);
+                    Toast.makeText(this, "Audio grabado exitosamente", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "No se encontró el archivo de audio", Toast.LENGTH_SHORT).show();
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(this, "Error al detener grabación", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Error al detener grabación: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                // Resetear estados en caso de error
+                btnIniciarGrabacion.setEnabled(true);
+                btnDetenerGrabacion.setEnabled(false);
+                btnReproducirAudio.setEnabled(false);
             }
         }
     }
 
     public void reproducirAudio(View view) {
         try {
-            if (audioData != null) {
+            if (audioData != null && audioData.length > 0) {
+                // Detener si ya está reproduciendo
+                if (mediaPlayer != null) {
+                    if (mediaPlayer.isPlaying()) {
+                        mediaPlayer.stop();
+                    }
+                    mediaPlayer.release();
+                }
 
+                // Crear archivo temporal para reproducción
                 File tempFile = new File(getExternalFilesDir(null), "temp_audio.3gp");
                 FileOutputStream fos = new FileOutputStream(tempFile);
                 fos.write(audioData);
@@ -194,39 +218,26 @@ public class CrearPelicula extends AppCompatActivity {
                 mediaPlayer.setDataSource(tempFile.getAbsolutePath());
                 mediaPlayer.prepare();
                 mediaPlayer.start();
-                isPlaying = true;
 
-                btnReproducirAudio.setEnabled(false);
                 Toast.makeText(this, "Reproduciendo audio", Toast.LENGTH_SHORT).show();
 
-
-                mediaPlayer.setOnCompletionListener(mp -> {
-                    btnReproducirAudio.setEnabled(true);
-                    isPlaying = false;
+                // Listener para cuando termine la reproducción
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        Toast.makeText(CrearPelicula.this, "Audio finalizado", Toast.LENGTH_SHORT).show();
+                    }
                 });
+
             } else {
-                Toast.makeText(this, "No hay audio para reproducir", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "No hay audio para reproducir. Graba primero.", Toast.LENGTH_SHORT).show();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "Error al reproducir audio", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error al reproducir audio: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void detenerReproduccion(View view) {
-        if (mediaPlayer != null && isPlaying) {
-            try {
-                mediaPlayer.stop();
-                mediaPlayer.reset();
-                isPlaying = false;
-
-                btnReproducirAudio.setEnabled(true);
-                Toast.makeText(this, "Reproducción detenida", Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     private void cargarAudio() {
         AdminDB admin = new AdminDB(this, "Proyecto", null, 2);
@@ -341,8 +352,15 @@ public class CrearPelicula extends AppCompatActivity {
             return;
         }
 
+        // VALIDAR QUE EL AUDIO NO ESTÉ VACÍO
+        if (!modoEdicion && audioData == null) {
+            Toast.makeText(this, "Debe grabar un audio antes de guardar", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         int codigo = Integer.parseInt(codigoStr);
         int duracion = Integer.parseInt(duracionStr);
+
         if (!modoEdicion && imagenBitmap == null) {
             Toast.makeText(this, getString(R.string.toast_foto), Toast.LENGTH_LONG).show();
             return;
@@ -353,6 +371,7 @@ public class CrearPelicula extends AppCompatActivity {
             if (actualizo) finish();
             return;
         }
+
         if (codigo > 0 && duracion > 0) {
             Registrar(codigo, titulo, duracion, genero);
 
@@ -365,7 +384,6 @@ public class CrearPelicula extends AppCompatActivity {
             txtlatitud.setText("");
             txtlongitud.setText("");
             audioData = null;
-
 
             btnIniciarGrabacion.setEnabled(true);
             btnDetenerGrabacion.setEnabled(false);

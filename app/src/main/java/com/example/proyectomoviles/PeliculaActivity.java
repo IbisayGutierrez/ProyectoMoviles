@@ -53,11 +53,21 @@ public class PeliculaActivity extends AppCompatActivity {
         lista.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
             itemseleccionado = position;
 
+
             for (int i = 0; i < lista.getChildCount(); i++) {
-                lista.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
+                View child = lista.getChildAt(i);
+                if (child instanceof com.google.android.material.card.MaterialCardView) {
+                    ((com.google.android.material.card.MaterialCardView) child).setCardBackgroundColor(Color.WHITE);
+                }
             }
-            view.setBackgroundColor(Color.GRAY);
+
+
+            if (view instanceof com.google.android.material.card.MaterialCardView) {
+                ((com.google.android.material.card.MaterialCardView) view).setCardBackgroundColor(Color.LTGRAY);
+            }
+
             activarBtn();
+
         });
     }
 
@@ -111,8 +121,8 @@ public class PeliculaActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
 
             View itemresaltado = lista.getChildAt(itemseleccionado);
-            if (itemresaltado != null) {
-                itemresaltado.setBackgroundColor(0);
+            if (itemresaltado != null && itemresaltado instanceof com.google.android.material.card.MaterialCardView) {
+                ((com.google.android.material.card.MaterialCardView) itemresaltado).setCardBackgroundColor(Color.WHITE);
             }
             itemseleccionado = -1;
             editar.setEnabled(false);
@@ -215,5 +225,11 @@ public class PeliculaActivity extends AppCompatActivity {
         super.onResume();
         datos.clear();
         cargarPeliculas();
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+        if (adapter != null) {
+            adapter.liberarMediaPlayer();
+        }
     }
 }
