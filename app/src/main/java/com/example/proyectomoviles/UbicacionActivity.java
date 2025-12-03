@@ -34,7 +34,7 @@ public class UbicacionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Requerido por osmdroid
+
         Configuration.getInstance().setUserAgentValue(getPackageName());
         setContentView(R.layout.activity_ubicacion);
 
@@ -44,17 +44,17 @@ public class UbicacionActivity extends AppCompatActivity {
             finish();
         });
 
-        // Referencias UI
+
         map = findViewById(R.id.map);
         txtLatitud = findViewById(R.id.txtLatitud);
         txtLongitud = findViewById(R.id.txtLongitud);
         btnGuardarUb = findViewById(R.id.btnGuardarUb);
 
-        // Configuración del mapa
+
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setMultiTouchControls(true);
 
-        // 👇 Nueva lógica: tomar ubicación enviada o usar la de defecto
+
         double latInicial = 10.430684188597372;
         double lonInicial = -85.08498580135634;
 
@@ -73,7 +73,7 @@ public class UbicacionActivity extends AppCompatActivity {
                     lonInicial = Double.parseDouble(lonStr);
                 }
             } catch (NumberFormatException e) {
-                // Si algo falla, se queda con la ubicación por defecto
+
             }
         }
 
@@ -82,7 +82,7 @@ public class UbicacionActivity extends AppCompatActivity {
         mapController.setZoom(15.0);
         mapController.setCenter(puntoInicial);
 
-        // Marcador inicial con la ubicación (guardada o por defecto)
+
         marca = new Marker(map);
         marca.setPosition(puntoInicial);
         marca.setTitle("Ubicación seleccionada");
@@ -91,7 +91,7 @@ public class UbicacionActivity extends AppCompatActivity {
         txtLatitud.setText(String.valueOf(puntoInicial.getLatitude()));
         txtLongitud.setText(String.valueOf(puntoInicial.getLongitude()));
 
-        // Listener para toques en el mapa
+
         MapEventsReceiver mapEventsReceiver = new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
@@ -113,7 +113,7 @@ public class UbicacionActivity extends AppCompatActivity {
                 Manifest.permission.ACCESS_COARSE_LOCATION
         });
 
-        // Botón: devolver la ubicación a CrearPelicula
+
         btnGuardarUb.setOnClickListener(v -> {
             String lat = txtLatitud.getText().toString();
             String lon = txtLongitud.getText().toString();
@@ -122,7 +122,7 @@ public class UbicacionActivity extends AppCompatActivity {
             data.putExtra("latitud", lat);
             data.putExtra("longitud", lon);
             setResult(RESULT_OK, data);
-            finish(); // vuelve a CrearPelicula
+            finish();
         });
     }
 

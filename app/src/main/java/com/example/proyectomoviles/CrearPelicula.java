@@ -43,7 +43,7 @@ public class CrearPelicula extends AppCompatActivity {
     Button btnIniciarGrabacion, btnDetenerGrabacion, btnReproducirAudio;
 
     static final int REQ_UBICACION = 100;
-    private static final int REQUEST_PERMISSION_CODE = 1000; // NUEVO
+    private static final int REQUEST_PERMISSION_CODE = 1000;
 
     boolean modoEdicion = false;
     int codigoOriginal;
