@@ -39,7 +39,7 @@ public class CrearPelicula extends AppCompatActivity {
 
     EditText txtCodigo, txtTitulo,txtDuracion, txtGenero,txtlatitud, txtlongitud;
 
-    // NUEVOS BOTONES DE AUDIO
+
     Button btnIniciarGrabacion, btnDetenerGrabacion, btnReproducirAudio;
 
     static final int REQ_UBICACION = 100;
@@ -136,7 +136,6 @@ public class CrearPelicula extends AppCompatActivity {
 
     public void iniciarGrabacion(View view) {
         try {
-            // Liberar MediaRecorder anterior si existe
             if (mediaRecorder != null) {
                 mediaRecorder.release();
             }
@@ -169,7 +168,7 @@ public class CrearPelicula extends AppCompatActivity {
                 mediaRecorder.release();
                 mediaRecorder = null;
 
-                // Leer el archivo y guardarlo en memoria
+
                 File audioFile = new File(outputFile);
                 if (audioFile.exists()) {
                     audioData = new byte[(int) audioFile.length()];
@@ -189,7 +188,7 @@ public class CrearPelicula extends AppCompatActivity {
                 e.printStackTrace();
                 Toast.makeText(this, "Error al detener grabación: " + e.getMessage(), Toast.LENGTH_SHORT).show();
 
-                // Resetear estados en caso de error
+
                 btnIniciarGrabacion.setEnabled(true);
                 btnDetenerGrabacion.setEnabled(false);
                 btnReproducirAudio.setEnabled(false);
@@ -200,7 +199,7 @@ public class CrearPelicula extends AppCompatActivity {
     public void reproducirAudio(View view) {
         try {
             if (audioData != null && audioData.length > 0) {
-                // Detener si ya está reproduciendo
+
                 if (mediaPlayer != null) {
                     if (mediaPlayer.isPlaying()) {
                         mediaPlayer.stop();
@@ -208,7 +207,7 @@ public class CrearPelicula extends AppCompatActivity {
                     mediaPlayer.release();
                 }
 
-                // Crear archivo temporal para reproducción
+
                 File tempFile = new File(getExternalFilesDir(null), "temp_audio.3gp");
                 FileOutputStream fos = new FileOutputStream(tempFile);
                 fos.write(audioData);
@@ -221,7 +220,7 @@ public class CrearPelicula extends AppCompatActivity {
 
                 Toast.makeText(this, "Reproduciendo audio", Toast.LENGTH_SHORT).show();
 
-                // Listener para cuando termine la reproducción
+
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
@@ -352,7 +351,7 @@ public class CrearPelicula extends AppCompatActivity {
             return;
         }
 
-        // VALIDAR QUE EL AUDIO NO ESTÉ VACÍO
+
         if (!modoEdicion && audioData == null) {
             Toast.makeText(this, "Debe grabar un audio antes de guardar", Toast.LENGTH_LONG).show();
             return;

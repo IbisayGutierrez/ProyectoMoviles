@@ -1,7 +1,6 @@
 package com.example.proyectomoviles;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
@@ -17,7 +16,6 @@ import com.google.android.material.button.MaterialButton;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -93,7 +91,7 @@ public class CustomAdapterPelicula extends BaseAdapter {
             TextViewLongitud.setText("Lon: " + p.getLongitud());
         }
 
-        // Configurar botón de audio
+
         byte[] audioBytes = p.getAudio();
         if (audioBytes != null && audioBytes.length > 0) {
             btnReproducirAudio.setVisibility(View.VISIBLE);
@@ -105,22 +103,22 @@ public class CustomAdapterPelicula extends BaseAdapter {
         return view;
     }
 
-    // MÉTODO SIMPLE PARA REPRODUCIR
+
     private void reproducirAudio(byte[] audioData) {
         try {
-            // Detener si hay algo reproduciéndose
+
             if (mediaPlayer != null) {
                 mediaPlayer.stop();
                 mediaPlayer.release();
             }
 
-            // Crear archivo temporal
+
             File tempFile = new File(context.getExternalFilesDir(null), "temp_audio.3gp");
             FileOutputStream fos = new FileOutputStream(tempFile);
             fos.write(audioData);
             fos.close();
 
-            // Reproducir
+
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setDataSource(tempFile.getAbsolutePath());
             mediaPlayer.prepare();
